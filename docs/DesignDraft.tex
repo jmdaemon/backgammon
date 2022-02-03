@@ -1,11 +1,115 @@
-\documentclass{book}
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage[cachedir=build/minted_pymint,outputdir=build]{minted}
+
+\newlist{dashed}{itemize}{3}
+\setlist[dashed, 1]
+%label=\textendash, nosep
+{label=\textendash, nosep,
+    leftmargin=\parindent,
+    rightmargin=10pt
+}
 
 \begin{document}
 
 \input{cover}
+\tableofcontents
 
-\chapter{1}
+\chapter{Introduction}
 
-\part{Introduction}
+This is an initial draft for a CPSC 101 for the Winter 2022 semester by Team Java
+with Joseph Diza as the lead author and developer. 
+
+This document gives a quick \& extremely simplified overview
+of the actual API and design of the Backgammon game.
+
+\chapter{Design Elements}
+
+\section{List of Nouns}
+
+\begin{multicols}{2}
+    \begin{itemize}
+        \item Die
+        \item Doubling Cube
+        \item Point
+        \item Player
+        \item Computer
+        \item Game
+    \end{itemize}
+
+    \begin{itemize}
+        \item Engine
+        \item Utility
+        \item Board
+        \item Bar
+        \item Home
+        \item Chip
+    \end{itemize}
+\end{multicols}
+
+\chapter{Noun Entries}
+
+\section{Die}
+
+\subsection{Facts}
+
+%\begin{itemize}[label=\textendash, nosep]
+\begin{dashed}
+    \item There are two die in play in a game.
+    \item At the start of the game, both players roll to determine who goes first.
+The player with the higher roll plays first, and the dice are re-rolled if equal.
+    \item Players move their chips according to the rolls on their dice.
+        E.g Player rolls 2,5 he can choose to move one piece up 2, and another up 5,
+        or one piece for a combined movement of 7 points.
+    \item If the player rolls the same number on both dice, he "gets doubles", which
+        allows him to play each die twice.
+        E.g Player rolls 6,6 now he has 4 sixes that he can play.
     
+\end{dashed}
+%\end{itemize}
+
+\subsection{Summary}
+
+A single Die does not contain much information to warrant becoming a class (the
+only useful method for a single Die would be to generate a random integer).
+
+\section{Doubling Cube}
+
+\subection{Facts}
+\begin{dashed}
+\item The doubling cube is a multiplier that increases the number of points won by the player
+    at the end of the game.
+\end{dashed}
+
+\subection{Summary}
+
+\section{Point}
+
+%\begin{itemize}[label=\textendash, nosep]
+\begin{dashed}
+    \item There are 24 points total on the board.
+    \item Every point can hold 6 checkers.
+    \item There are 12 points on the outer board, and 12 on the home board.
+    \item A checker may only move to a point if it is open (contains < 2 opponents chips
+        or < 6 of the player's chips)
+\end{dashed}
+%\end{itemize}
+
+\subsection{Summary}
+
+A point at the very least needs to be some kind of container that has the ability
+to store checkers. It also needs to determine how many checkers are on a point.
+
+\section{Player}
+
+\begin{dashed}
+    \item There are two players in a game.
+    \item The player can make a series of moves
+\end{dashed}
+
 \end{document}
