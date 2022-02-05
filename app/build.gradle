@@ -9,6 +9,10 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+    id 'java'
+    id 'java-library'
+    //id "com.scuilion.syntastic" version "0.3.8"
+
 }
 
 repositories {
@@ -33,3 +37,20 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+test {
+	useJUnitPlatform()
+        maxHeapSize = '1G'
+        testLogging {
+		events "failed"
+		exceptionFormat "full"
+                showStandardStreams = true }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+    modularity.inferModulePath = true
+}
+
