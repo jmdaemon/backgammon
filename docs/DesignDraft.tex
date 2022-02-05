@@ -113,4 +113,30 @@ to store checkers. It also needs to determine how many checkers are on a point.
     \item The player can make a series of moves
 \end{dashed}
 
+\section{Chip}
+
+\subsection{Facts}
+%\begin{itemize}[label=\textendash, nosep]
+\begin{dashed}
+	\item Moves clockwise based on dice (from player home quadrant).
+	\item Allowed to choose which chip to move.
+	\item Not allowed to move to a position where there are already 2 enemy chips.
+	\item Allowed to land on a position where there is only one enemy chip, doing so
+	removes that enemy chip and relocates it to the bar.
+	\item Removed chips must be played next, they are played from the most 
+	counterclockwise position (the enemy home quadrant).
+	\item If no moves are available, player pass.
+	\item Each player has 15 chips
+\end{dashed}
+%\end{itemize}
+
+\subsection{Attributes}
+\begin{dashed}
+	\item Chips come in 2 colors (red & white)
+\end{dashed}
+
+\subsection{Summary}
+Due to the need to keep track of the chip location, a method maybe needed to update how many chips
+are on a pointer.
+
 \end{document}
