@@ -70,7 +70,7 @@ The player with the higher roll plays first, and the dice are re-rolled if equal
     \item If the player rolls the same number on both dice, he "gets doubles", which
         allows him to play each die twice.
         E.g Player rolls 6,6 now he has 4 sixes that he can play.
-    
+
 \end{dashed}
 %\end{itemize}
 
@@ -83,11 +83,40 @@ only useful method for a single Die would be to generate a random integer).
 
 \subsection{Facts}
 \begin{dashed}
-\item The doubling cube is a multiplier that increases the number of points won by the player
-    at the end of the game.
+\item The doubling cube governs the stakes of the game
+\item the game starts with 1 stake and the doubling cube is in the possession of both players
+\item at the start of your turn you may propose to double the stakes of the game with the doubling cube, the opposing player can accept the cube and continue with double the stakes or refuse, forcing them to concede.
+\item when accepted, the doubling cube is moved into the accepting players possesion, and will alternate until the end of the game.
+\item at the end of the game the value of your win is multiplied by the stakes.
+\end{dashed}
+
+\subsection{Attributes}
+\begin{itemize}
+\item multiplier. 2, 4, 8, 16....
+\item ownership
+\end{itemize}
+
+\subsection{Behaviors}
+\begin{itemize}
+\item double
+\end{itemize}
+
+\subsection{Collaborations}
+\begin{itemize}
+\item multiplier is used in Score
+\end{itemize}
+
+\section{Score}
+\begin{dashed}
+\item The points that you score for a match are determined by the type of win you achieve.
+\item A normal win requires you bear off all your chips, or that the other player concedes. This awards one point
+\item A Gammon win requires you win before the other player manages to bear off any chips. This awards 2 points
+\item A Backgammon requires you meet the prior requirements and the enemy player still has chips on your home quadrant or the bar. This awards 3 points.
+\item The points you are awarded are multiplied by the value of the doubling cube.
 \end{dashed}
 
 \subsection{Summary}
+Could maybe be handled somewhere else like in a victory class. do we got one of those?
 
 \section{Point}
 
