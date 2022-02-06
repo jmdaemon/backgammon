@@ -51,6 +51,6 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
-    modularity.inferModulePath = true
+    //modularity.inferModulePath = true
 }
 
