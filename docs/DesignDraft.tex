@@ -152,24 +152,101 @@ to store checkers. It also needs to determine how many checkers are on a point.
 
 \subsection{Facts}
 \begin{dashed}
-	\item Moves clockwise based on dice (from player home quadrant).
-	\item Allowed to choose which chip to move.
-	\item Not allowed to move to a position where there are already 2 enemy chips.
-	\item Allowed to land on a position where there is only one enemy chip, doing so
+    \item Moves clockwise based on dice (from player home quadrant).
+    \item Allowed to choose which chip to move.
+    \item Not allowed to move to a position where there are already 2 enemy chips.
+    \item Allowed to land on a position where there is only one enemy chip, doing so
       removes that enemy chip and relocates it to the bar.
-	\item Removed chips must be played next, they are played from the most
+    \item Removed chips must be played next, they are played from the most
       counterclockwise position (the enemy home quadrant).
-	\item If no moves are available, player pass.
-	\item Each player has 15 chips
+    \item If no moves are available, player pass.
+    \item Each player has 15 chips
 \end{dashed}
 
 \subsection{Attributes}
+
 \begin{dashed}
-	\item Chips come in 2 colors (red \& white)
+    \item Chips come in 2 colors (red \& white)
 \end{dashed}
 
 \subsection{Summary}
 Due to the need to keep track of the chip location, a method maybe needed to update how many chips
 are on a pointer.
+
+\section{Engine}
+
+\subsection{Facts}
+
+\begin{dashed}
+    \item React to the player's selection.
+    \item Assign the player the colour chip of his choice.
+    \item Determine the number of sets of games to be played and begin a new game after each one ends, or until the selected set or player ends the match.
+    \item Record each outcome from rolling the dice
+    \item When player selects a chip suggest him of the moves available for the chip
+    \item Move the chip to the desired position from the player
+    \item When all chips are in the home board of the player allow him to move the chips out of the board
+    \item Display points with a congratulations message to the player who wins
+\end{dashed}
+
+\subsection{Attributes}
+
+\begin{dashed}
+    \item Set of games (int)
+    \item Points (int)
+    \item GamePoints
+    \item Dice (int)
+    \item Doubling Dice (int)
+    \item Outcomes (Arraylist)
+    \item chips/point (Array of Arraylist[24])
+    \item Home
+\end{dashed}
+
+\subsection{Behaviours}
+
+\begin{dashed}
+    \item Store number of games
+    \item Store Incremented points
+    \item Store highest dice number when selected doubling
+    \item Store random number created
+    \item Store doubling dice number created
+    \item Keep Record of the outcomes of dice
+    \item Record chips per point
+    \item Store number of chips cleared
+\end{dashed}
+
+\subsection{Collaborations}
+
+\begin{dashed}
+    \item Collaborate with die and doubling cube to display random number generated between 1 and 6
+    \item Collaborate with Points to keep track of number of chips per point to give the player suggestions errors if any and a notification when he wins the game
+    \item Collaborate with Player and Computer to keep track of the options they select
+\end{dashed}
+
+\section{Computer}
+
+\subsection{Facts}
+
+\begin{dashed}
+    \item Select the dice option whenever the turn comes
+    \item Choose which chip to move so that AI can win the game
+\end{dashed}
+
+\subsection{Attributes}
+
+\begin{dashed}
+    \item none
+\end{dashed}
+
+\subsection{Behaviours}
+
+\begin{dashed}
+    \item none
+\end{dashed}
+
+\subsection{Collaborations}
+
+\begin{dashed}
+    \item none
+\end{dashed}
 
 \end{document}
