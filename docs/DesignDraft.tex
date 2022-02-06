@@ -9,7 +9,6 @@
 
 \newlist{dashed}{itemize}{3}
 \setlist[dashed, 1]
-%label=\textendash, nosep
 {label=\textendash, nosep,
     leftmargin=\parindent,
     rightmargin=10pt
@@ -59,7 +58,6 @@ of the actual API and design of the Backgammon game.
 
 \subsection{Facts}
 
-%\begin{itemize}[label=\textendash, nosep]
 \begin{dashed}
     \item There are two die in play in a game.
     \item At the start of the game, both players roll to determine who goes first.
@@ -72,7 +70,6 @@ The player with the higher roll plays first, and the dice are re-rolled if equal
         E.g Player rolls 6,6 now he has 4 sixes that he can play.
 
 \end{dashed}
-%\end{itemize}
 
 \subsection{Summary}
 
@@ -82,45 +79,53 @@ only useful method for a single Die would be to generate a random integer).
 \section{Doubling Cube}
 
 \subsection{Facts}
+
 \begin{dashed}
-\item The doubling cube governs the stakes of the game
-\item the game starts with 1 stake and the doubling cube is in the possession of both players
-\item at the start of your turn you may propose to double the stakes of the game with the doubling cube, the opposing player can accept the cube and continue with double the stakes or refuse, forcing them to concede.
-\item when accepted, the doubling cube is moved into the accepting players possesion, and will alternate until the end of the game.
-\item at the end of the game the value of your win is multiplied by the stakes.
+    \item The doubling cube controls the stakes of the game.
+    \item Games begin with a stake of one, the doubling cube may be used by either player.
+    \item Players at the start their turns may propose to double the stakes of the game
+        with the doubling cube, the opponent can accept the stakes refuse, forcing them
+        to concede the game at the current stakes.
+    \item The doubling cube multiplies the stakes of the winner at the end of the game.
 \end{dashed}
 
 \subsection{Attributes}
+
 \begin{itemize}
-\item multiplier. 2, 4, 8, 16....
-\item ownership
+    \item Die Faces (2, 4, 8, 16, 32, 64)
 \end{itemize}
 
 \subsection{Behaviors}
+
 \begin{itemize}
-\item double
+    \item double
 \end{itemize}
 
 \subsection{Collaborations}
-\begin{itemize}
-\item multiplier is used in Score
+    \begin{itemize}
+    \item multiplier is used in Score
 \end{itemize}
 
 \section{Score}
+
+\subsection{Facts}
+
 \begin{dashed}
-\item The points that you score for a match are determined by the type of win you achieve.
-\item A normal win requires you bear off all your chips, or that the other player concedes. This awards one point
-\item A Gammon win requires you win before the other player manages to bear off any chips. This awards 2 points
-\item A Backgammon requires you meet the prior requirements and the enemy player still has chips on your home quadrant or the bar. This awards 3 points.
-\item The points you are awarded are multiplied by the value of the doubling cube.
+    \item The points that you score for a match are determined by the type of win you achieve.
+    \item A normal win requires you bear off all your chips, or that the other player concedes. This awards one point
+    \item A Gammon win requires you win before the other player manages to bear off any chips. This awards 2 points
+    \item A Backgammon requires you meet the prior requirements and the enemy player still has chips on your home quadrant or the bar. This awards 3 points.
+    \item The points you are awarded are multiplied by the value of the doubling cube.
 \end{dashed}
 
 \subsection{Summary}
-Could maybe be handled somewhere else like in a victory class. do we got one of those?
+The doubling cube is a multiplier that determines the number of points awarded
+to the winner at the end of a game.
 
 \section{Point}
 
-%\begin{itemize}[label=\textendash, nosep]
+\subsection{Facts}
+
 \begin{dashed}
     \item There are 24 points total on the board.
     \item Every point can hold 6 checkers.
@@ -128,7 +133,6 @@ Could maybe be handled somewhere else like in a victory class. do we got one of 
     \item A checker may only move to a point if it is open (contains < 2 opponents chips
         or < 6 of the player's chips)
 \end{dashed}
-%\end{itemize}
 
 \subsection{Summary}
 
@@ -136,6 +140,8 @@ A point at the very least needs to be some kind of container that has the abilit
 to store checkers. It also needs to determine how many checkers are on a point.
 
 \section{Player}
+
+\subsection{Facts}
 
 \begin{dashed}
     \item There are two players in a game.
@@ -215,19 +221,17 @@ to store checkers. It also needs to determine how many checkers are on a point.
 \section{Chip}
 
 \subsection{Facts}
-%\begin{itemize}[label=\textendash, nosep]
 \begin{dashed}
 	\item Moves clockwise based on dice (from player home quadrant).
 	\item Allowed to choose which chip to move.
 	\item Not allowed to move to a position where there are already 2 enemy chips.
 	\item Allowed to land on a position where there is only one enemy chip, doing so
-	removes that enemy chip and relocates it to the bar.
-	\item Removed chips must be played next, they are played from the most 
-	counterclockwise position (the enemy home quadrant).
+      removes that enemy chip and relocates it to the bar.
+	\item Removed chips must be played next, they are played from the most
+      counterclockwise position (the enemy home quadrant).
 	\item If no moves are available, player pass.
 	\item Each player has 15 chips
 \end{dashed}
-%\end{itemize}
 
 \subsection{Attributes}
 \begin{dashed}
