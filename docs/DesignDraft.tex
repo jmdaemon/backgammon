@@ -39,12 +39,10 @@ of the actual API and design of the Backgammon game.
         \item Point
         \item Player
         \item Computer
-        \item Game
     \end{itemize}
 
     \begin{itemize}
-        \item Engine
-        \item Utility
+        \item Score
         \item Board
         \item Bar
         \item Home
@@ -61,14 +59,13 @@ of the actual API and design of the Backgammon game.
 \begin{dashed}
     \item There are two die in play in a game.
     \item At the start of the game, both players roll to determine who goes first.
-The player with the higher roll plays first, and the dice are re-rolled if equal.
+        The player with the higher roll plays first, and the dice are re-rolled if equal.
     \item Players move their chips according to the rolls on their dice.
         E.g Player rolls 2,5 he can choose to move one piece up 2, and another up 5,
         or one piece for a combined movement of 7 points.
     \item If the player rolls the same number on both dice, he "gets doubles", which
         allows him to play each die twice.
         E.g Player rolls 6,6 now he has 4 sixes that he can play.
-
 \end{dashed}
 
 \subsection{Summary}
@@ -152,24 +149,53 @@ to store checkers. It also needs to determine how many checkers are on a point.
 
 \subsection{Facts}
 \begin{dashed}
-	\item Moves clockwise based on dice (from player home quadrant).
-	\item Allowed to choose which chip to move.
-	\item Not allowed to move to a position where there are already 2 enemy chips.
-	\item Allowed to land on a position where there is only one enemy chip, doing so
+    \item Moves clockwise based on dice (from player home quadrant).
+    \item Allowed to choose which chip to move.
+    \item Not allowed to move to a position where there are already 2 enemy chips.
+    \item Allowed to land on a position where there is only one enemy chip, doing so
       removes that enemy chip and relocates it to the bar.
-	\item Removed chips must be played next, they are played from the most
+    \item Removed chips must be played next, they are played from the most
       counterclockwise position (the enemy home quadrant).
-	\item If no moves are available, player pass.
-	\item Each player has 15 chips
+    \item If no moves are available, player pass.
+    \item Each player has 15 chips
 \end{dashed}
 
 \subsection{Attributes}
+
 \begin{dashed}
-	\item Chips come in 2 colors (red \& white)
+    \item Chips come in 2 colors (red \& white)
 \end{dashed}
 
 \subsection{Summary}
 Due to the need to keep track of the chip location, a method maybe needed to update how many chips
 are on a pointer.
+
+\section{Computer}
+
+\subsection{Facts}
+
+\begin{dashed}
+    \item A computer opponent selects available moves whenever possible.
+    \item A computer opponent moves chips onto points, and plays
+        the game "like a player".
+\end{dashed}
+
+\subsection{Attributes}
+
+\begin{dashed}
+    \item none
+\end{dashed}
+
+\subsection{Behaviours}
+
+\begin{dashed}
+    \item none
+\end{dashed}
+
+\subsection{Collaborations}
+
+\begin{dashed}
+    \item none
+\end{dashed}
 
 \end{document}
