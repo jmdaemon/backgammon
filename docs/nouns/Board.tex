@@ -2,7 +2,7 @@
 
 \subsection{Facts}
 
-\begin{itemize} [itemsep=2pt,parsep=2pt]
+\begin{dashed}
     \item Has 4 quadrants grouped into sets of 6 points each and a bar.
     \item Two quadrants are Home Boards, where one belongs to each player. The remaining two make up         the Outer Board.
     \item The Outer Board consists of points 7 through 18.
@@ -14,12 +14,12 @@
     \item Chips can be born off (removed from the Board) once all of their remaining chips are located       within their Home Board.
     \item Born off chips contribute toward the Home Count so the total remains 15.
     \item Born off chips are stored in point 25 for black or point 0 for red.
-\end{itemize}
+\end{dashed}
 
 \noindent{\newline\textbf{Board} - The board is a visual representation of the game. The board will track the number of chips in each Home, the number of chips on the bar and who they belong to, and the number of chips each player has born off. Chips on the Board with legal moves will be highlighted if there are any. The board will manage the movement of chips around the board.}
 
 \begin{multicols}{2}
-    \begin{itemize} [itemsep=2pt,parsep=2pt]
+    \begin{dashed}
         \subsection{Attributes}
         \item black home count
         \item red home count
@@ -27,27 +27,27 @@
         \item red bar count
         \item chip tracker [26]
         \item point colour [26]
-    \end{itemize}
+    \end{dashed}
 
-    \begin{itemize} [itemsep=2pt,parsep=2pt]
+    \begin{dashed}
         \subsection{Behaviour}
         \item \textbf{moveTo}
         \item \textbf{getHomeCount}
         \item \textbf{getBarCount}
         \item \textbf{getChipCountAt}
         \item \textbf{getPointColourAt}
-    \end{itemize}
+    \end{dashed}
 \end{multicols}
 
 \subsection{Collaborations}
-\begin{itemize} [itemsep=2pt,parsep=2pt]
+\begin{dashed}
     \item \textbf{Game} needs to co-operate with \textbf{Board} to generate a list of valid moves.
     \item The \textbf{UI} and \textbf{Board} need to co-operate in order to move chips.
     \item The \textbf{Board} and \textbf{UI} need to co-operate in order to \textbf{undo} moves.
     \item \textbf{Game} and \textbf{Board} need o co-operate in order to consume dice after moves.
-\end{itemize}
+\end{dashed}
 
 \subsection{Other Notes}
-\begin{itemize}
+\begin{dashed}
     \item Born off chips contribute to \textbf{getHomeCount}, not its respective attribute.
-\end{itemize}
+\end{dashed}
