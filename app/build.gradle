@@ -54,3 +54,8 @@ java {
     //modularity.inferModulePath = true
 }
 
+// Creates Java Docs from the Source
+javadoc {
+  source = sourceSets.main.allJava
+  classpath = configurations.compile
+}
