@@ -4,7 +4,30 @@
 
 \begin{dashed}
     \item There are two players in a game.
-    \item The player can make chips onto points on the board.
+    \item Decide which chips he wants to (legally) move.
+    \item The objective of the player is to bring all the chips in home board and then get rid of chips.
+\end{dashed}
+
+\subsection{Attributes}
+
+\begin{dashed}
+    \item chipColor (String)
+    \item noOfGames (int)
+    \item continueGame (boolean)
+\end{dashed}
+
+\subsection{Behaviours}
+
+\begin{dashed}
+    \item Store chip colour
+    \item Store set of games
+    \item Ask for continuing or ending the game
+\end{dashed}
+
+\subsection{Collaborations}
+
+\begin{dashed}
+    \item Collaborate with engine to suggest moves of the selected Chip
 \end{dashed}
 
 \noindent{\newline\textbf{Player} - One of the players in the game. Likely to be integrated with Chip.}
