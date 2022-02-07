@@ -1,0 +1,10 @@
+#!/bin/sh
+
+upstream=$(git remote show | grep upstream)
+
+if [[ -z "$upstream" ]]; then
+    git remote add upstream https://github.com/jmdaemon/backgammon
+fi
+
+git fetch upstream
+git merge upstream/master master
