@@ -11,7 +11,9 @@
 \setlist[dashed, 1]
 {label=\textendash, nosep,
     leftmargin=\parindent,
-    rightmargin=10pt
+    rightmargin=10pt,
+    itemsep=2pt,
+    parsep=2pt
 }
 
 \newcommand\java[1] {
@@ -38,34 +40,42 @@ of the actual API and design of the Backgammon game.
 
 \begin{multicols}{2}
     \begin{itemize}
+        \item Backgammon
         \item Bar
         \item Board
         \item Chip
         \item Computer
         \item Die
+        \item Doubling Cube
     \end{itemize}
 
     \begin{itemize}
-        \item Doubling Cube
+        \item Gammon
         \item Home
+        \item Move
         \item Player
         \item Point
         \item Score
+        \item Single
     \end{itemize}
 \end{multicols}
 
 \chapter{Noun Entries}
 
+\input{nouns/Backgammon}
 \input{nouns/Bar}
 \input{nouns/Board}
 \input{nouns/Chip}
 \input{nouns/Computer}
 \input{nouns/Die}
-
 \input{nouns/DoublingCube}
+
+\input{nouns/Gammon}
 \input{nouns/Home}
+\input{nouns/Move}
 \input{nouns/Player}
 \input{nouns/Point}
 \input{nouns/Score}
+\input{nouns/Single}
 
 \end{document}
