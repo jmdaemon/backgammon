@@ -78,4 +78,37 @@ of the actual API and design of the Backgammon game.
 \input{nouns/Score}
 \input{nouns/Single}
 
+\section{Players}
+
+\subsection{Facts}
+
+\begin{dashed}
+    \item Roll Dice (Single roll or double roll)
+    \item Decide which chips he wants to move (legally)
+    \item Try to bring all chips in home board and then move it out of the board
+    \item Accept or reject the AI's request to double a dice.
+    \item Pull a request for doubling the dice
+\end{dashed}
+
+\subsection{Attributes}
+
+    \begin{dashed}
+        \item chipColor (String)
+        \item noOfgames (int)
+        \item continueGame (boolean)
+    \end{dashed}
+
+\subsection{Behaviours}
+
+    \begin{dashed}
+        \item Store chip color
+        \item Store set of games
+        \item Ask for continuing or ending the game
+    \end{dashed}
+
+\subsection{Collaborations}
+
+    \begin{dashed}
+        \item Collaborate with engine to suggest moves of the selected chip
+    \end{dashed}
 \end{document}
