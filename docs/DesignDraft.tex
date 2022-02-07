@@ -16,186 +16,285 @@
 
 \begin{document}
 
-\input{cover}
-\tableofcontents
+    \input{cover}
+    \tableofcontents
 
-\chapter{Introduction}
+    \chapter{Introduction}
 
-This is an initial draft for a CPSC 101 for the Winter 2022 semester by Team Decaffeinators
-with Joseph Diza as the lead author and developer.  \\
+    This is an initial draft for a CPSC 101 for the Winter 2022 semester by Team Decaffeinators
+    with Joseph Diza as the lead author and developer.  \\
 
-\noindent
-This document gives a quick \& extremely simplified overview
-of the actual API and design of the Backgammon game.
+    \noindent
+    This document gives a quick \& extremely simplified overview
+    of the actual API and design of the Backgammon game.
 
-\chapter{Design Elements}
+    \chapter{Design Elements}
 
-\section{List of Nouns}
+    \section{List of Nouns}
 
-\begin{multicols}{2}
-    \begin{itemize}
-        \item Die
-        \item Doubling Cube
-        \item Point
-        \item Player
-        \item Computer
-    \end{itemize}
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item Die
+            \item Doubling Cube
+            \item Point
+            \item Player
+            \item Computer
+        \end{itemize}
 
-    \begin{itemize}
-        \item Score
-        \item Board
-        \item Bar
-        \item Home
-        \item Chip
-    \end{itemize}
-\end{multicols}
+        \begin{itemize}
+            \item Score
+            \item Board
+            \item Bar
+            \item Home
+            \item Chip
+        \end{itemize}
+    \end{multicols}
 
-\chapter{Noun Entries}
 
-\section{Die}
 
-\subsection{Facts}
 
-\begin{dashed}
-    \item There are two die in play in a game.
-    \item At the start of the game, both players roll to determine who goes first.
+
+    \chapter{Noun Entries}
+
+    \section{Board}
+
+    \subsection{Facts}
+
+    \begin{dashed}
+        \item Has 4 quadrants grouped into sets of 6 points each and a bar.
+        \item Two quadrants are Home Boards, where one belongs to each player. The remaining two make up the Outer Board.
+        \item The Outer Board consists of points 7 through 18.
+        \item Black chips move clockwise around the Board toward the Black Home.
+        \item Red chips move counterclockwise around the Board toward the Red Home.
+        \item The bar separates the Homes Boards from the Outer Board and can hold any number of chips of both colours simultaneously.
+        \item A player must move all their chips off the bar before any other move can be made.
+        \item A chip moved off the bar will start from the most counterclockwise position in the opponents Home Board.
+        \item All chips belonging to a player with at least one legal move will be highlighted and available to move after the dice are rolled
+        \item Moving a chip adds it at a new point and removes it from its initial point.
+        \item Moving to a blot causes the opposing player’s chip to move to the bar.
+        \item Chips can be born off (removed from the Board) once all of their remaining chips are located within their Home Board.
+        \item Born off chips contribute toward the Home Count so the total remains 15.
+        \item Born off chips are stored in point 25 for black or point 0 for red.
+    \end{dashed}
+
+    \noindent{\newline \textbf{Board} - The board is a visual representation of the game. The board will track the number of chips in each Home, the number of chips on the bar and who they belong to, and the number of chips each player has born off. Chips on the Board with legal moves will be highlighted if there are any. The board will manage the movement of chips around the board.}
+
+    \newpage
+    \begin{multicols}{2}
+        \begin{dashed}
+            \subsection{Attributes}
+            \item black home count
+            \item red home count
+            \item black bar count
+            \item red bar count
+            \item chip tracker [26]
+            \item point colour [26]
+        \end{dashed}
+
+        \begin{dashed}
+            \subsection{Behaviour}
+            \item \textbf{moveTo}
+            \item \textbf{getHomeCount}
+            \item \textbf{getBarCount}
+            \item \textbf{getChipCountAt}
+            \item \textbf{getPointColourAt}
+        \end{dashed}
+    \end{multicols}
+
+    \subsection{Collaborations}
+
+    \begin{dashed}
+        \item The \textbf{UI} will display the possible moves by asking \textbf{Game} to calculate them using chip locations from \textbf{Board} and the dice from \textbf{Die}.
+        \item The \textbf{UI} and \textbf{Board} need to co-operate in order to move chips.
+        \item The \textbf{Board} and \textbf{Game} need to co-operate in order to \textbf{undo} moves.
+    \end{dashed}
+
+    \subsection{Other Notes}
+
+    \begin{dashed}
+        \item Born off chips contribute to \textbf{getHomeCount}, not its respective attribute.
+    \end{dashed}
+
+
+
+
+    \newpage
+    \section{Chip}
+
+    \subsection{Facts}
+    \begin{dashed}
+        \item Can be either black or red.
+        \item Chips move clockwise around the board to their Home Board.
+        \item A single chip of either colour belongs to each player.
+        \item The chip belonging to the player is referenced 15 times.
+    \end{dashed}
+
+    \subsection{Attribute}
+    \begin{dashed}
+        \item Colour
+    \end{dashed}
+
+    \subsection{Attribute}
+    \begin{dashed}
+        \item getColour
+    \end{dashed}
+
+    \subsection{Summary}
+    Due to the need to keep track of the chip location, a method maybe needed to update how many chips
+    are on a pointer.
+
+
+
+
+
+
+    \newpage
+    \section{Computer}
+
+    \subsection{Facts}
+
+    \begin{dashed}
+        \item A computer opponent selects available moves whenever possible.
+        \item A computer opponent moves chips onto points, and plays
+        the game "like a player".
+    \end{dashed}
+
+
+
+
+
+    \newpage
+    \section{Die}
+
+    \subsection{Facts}
+
+    \begin{dashed}
+        \item There are two die in play in a game.
+        \item At the start of the game, both players roll to determine who goes first.
         The player with the higher roll plays first, and the dice are re-rolled if equal.
-    \item Players move their chips according to the rolls on their dice.
+        \item Players move their chips according to the rolls on their dice.
         E.g Player rolls 2,5 he can choose to move one piece up 2, and another up 5,
         or one piece for a combined movement of 7 points.
-    \item If the player rolls the same number on both dice, he "gets doubles", which
+        \item If the player rolls the same number on both dice, he "gets doubles", which
         allows him to play each die twice.
         E.g Player rolls 6,6 now he has 4 sixes that he can play.
-\end{dashed}
+        \item
+    \end{dashed}
 
-\subsection{Summary}
+    \subsection{Summary}
 
-A single Die does not contain much information to warrant becoming a class (the
-only useful method for a single Die would be to generate a random integer).
+    A single Die does not contain enough information to warrant becoming a class (the
+    only useful method for a single Die would be to generate a random integer).
 
-\section{Doubling Cube}
 
-\subsection{Facts}
 
-\begin{dashed}
-    \item The doubling cube controls the stakes of the game.
-    \item Games begin with a stake of one, the doubling cube may be used by either player.
-    \item Players at the start their turns may propose to double the stakes of the game
-        with the doubling cube, the opponent can accept the stakes refuse, forcing them
+
+
+    \newpage
+    \section{Doubling Cube}
+
+    \subsection{Facts}
+
+    \begin{dashed}
+        \item The doubling cube controls the stakes of the game.
+        \item Games begin with a stake of one, the doubling cube may be used by either player.
+        \item Players at the start their turns may propose to double the stakes of the game
+        with the doubling cube, the opponent can accept the stakes, or refuse, forcing them
         to concede the game at the current stakes.
-    \item The doubling cube multiplies the stakes of the winner at the end of the game.
-\end{dashed}
+        \item The doubling cube multiplies the stakes of the winner at the end of the game.
+    \end{dashed}
 
-\subsection{Attributes}
+    \subsection{Summary}
+    The Doubling Cube Will give rise to an attribute in \textbf{Game}.
 
-\begin{itemize}
-    \item Die Faces (2, 4, 8, 16, 32, 64)
-\end{itemize}
+    \subsection{Collaborations}
 
-\subsection{Behaviors}
-
-\begin{itemize}
-    \item double
-\end{itemize}
-
-\subsection{Collaborations}
     \begin{itemize}
-    \item multiplier is used in Score
-\end{itemize}
+        \item The \textbf{Doubling Cube} multiplier is used by \textbf{Score} to determine the stake awarded to the winning player at the end of each game.
+    \end{itemize}
 
-\section{Score}
 
-\subsection{Facts}
 
-\begin{dashed}
-    \item The points that you score for a match are determined by the type of win you achieve.
-    \item A normal win requires you bear off all your chips, or that the other player concedes. This awards one point
-    \item A Gammon win requires you win before the other player manages to bear off any chips. This awards 2 points
-    \item A Backgammon requires you meet the prior requirements and the enemy player still has chips on your home quadrant or the bar. This awards 3 points.
-    \item The points you are awarded are multiplied by the value of the doubling cube.
-\end{dashed}
 
-\subsection{Summary}
-The doubling cube is a multiplier that determines the number of points awarded
-to the winner at the end of a game.
 
-\section{Point}
+    \newpage
+    \section{Home}
 
-\subsection{Facts}
+    \subsection{Facts}
 
-\begin{dashed}
-    \item There are 24 points total on the board.
-    \item Every point can hold 6 checkers.
-    \item There are 12 points on the outer board, and 12 on the home board.
-    \item A checker may only move to a point if it is open (contains < 2 opponents chips
-        or < 6 of the player's chips)
-\end{dashed}
+    \begin{dashed}
+        \item Is part of the Board.
+        \item There are two Homes on opposite to each other on the same side of the board.
+        \item Each consists of 6 points.
+        \item Black Home consists of points 19 through 24.
+        \item Red Home consists of points 1 through 6.
+        \item The number of a player’s chips located on their Home Board is their Home Count.
+    \end{dashed}
 
-\subsection{Summary}
+    \subsection{Summary}
+    Home doesn't contain enough functionality to warrant becoming a class, but it will give rise to attributes in Board.
 
-A point at the very least needs to be some kind of container that has the ability
-to store checkers. It also needs to determine how many checkers are on a point.
 
-\section{Player}
 
-\subsection{Facts}
 
-\begin{dashed}
-    \item There are two players in a game.
-    \item The player can make a series of moves
-\end{dashed}
 
-\section{Chip}
+    \newpage
+    \section{Player}
 
-\subsection{Facts}
-\begin{dashed}
-    \item Moves clockwise based on dice (from player home quadrant).
-    \item Allowed to choose which chip to move.
-    \item Not allowed to move to a position where there are already 2 enemy chips.
-    \item Allowed to land on a position where there is only one enemy chip, doing so
-      removes that enemy chip and relocates it to the bar.
-    \item Removed chips must be played next, they are played from the most
-      counterclockwise position (the enemy home quadrant).
-    \item If no moves are available, player pass.
-    \item Each player has 15 chips
-\end{dashed}
+    \subsection{Facts}
 
-\subsection{Attributes}
+    \begin{dashed}
+        \item There are two players in a game.
+        \item The player can make a series of moves.
+    \end{dashed}
 
-\begin{dashed}
-    \item Chips come in 2 colors (red \& white)
-\end{dashed}
 
-\subsection{Summary}
-Due to the need to keep track of the chip location, a method maybe needed to update how many chips
-are on a pointer.
 
-\section{Computer}
 
-\subsection{Facts}
 
-\begin{dashed}
-    \item A computer opponent selects available moves whenever possible.
-    \item A computer opponent moves chips onto points, and plays
-        the game "like a player".
-\end{dashed}
+    \newpage
+    \section{Point}
 
-\subsection{Attributes}
+    \subsection{Facts}
 
-\begin{dashed}
-    \item none
-\end{dashed}
+    \begin{dashed}
+        \item Is part of the board.
+        \item Points are divided up into smaller sections of the Board, each consisting of 6 points.
+        \item Triangle shaped with the base against either the top or bottom edge of the Board and alternate in colour.
+        \item Can be empty or contain chips.
+        \item Can only hold chips of a single colour at a time.
+        \item Has no limit to the number of chips each can hold.
+        \item A point occupied by no more than 1 of the opposing player’s chips is called a blot.
+    \end{dashed}
 
-\subsection{Behaviours}
+    \noindent{\newline \textbf{Point} - A series of triangles alternating in colour that chips can be placed on. Points can only hold chips of a single colour at a time, but there is no limit to the number of chips they can hold. A point occupied by more than 1 of the opposing player's chips is locked and cannot be moved to.}
 
-\begin{dashed}
-    \item none
-\end{dashed}
+    \subsection{Summary}
 
-\subsection{Collaborations}
+    A point at the very least needs to be some kind of container that has the ability
+    to store checkers. It also needs to determine how many checkers are on a point.
 
-\begin{dashed}
-    \item none
-\end{dashed}
+
+
+
+
+    \newpage
+    \section{Score}
+
+    \subsection{Facts}
+
+    \begin{dashed}
+        \item The points that you score for a match are determined by the type of win you achieve.
+        \item A normal win requires you bear off all your chips, or that the other player concedes. This    awards one point
+        \item A Gammon win requires you win before the other player manages to bear off any chips. This awards 2 points
+        \item A Backgammon requires you meet the prior requirements and the enemy player still has chips on your home quadrant or the bar. This awards 3 points.
+        \item The points you are awarded are multiplied by the value of the doubling cube.
+    \end{dashed}
+
+    \subsection{Summary}
+    The doubling cube is a multiplier that determines the number of points awarded
+    to the winner at the end of a game.
+
+
 
 \end{document}
