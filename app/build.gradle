@@ -12,50 +12,50 @@ plugins {
     id 'java'
     id 'java-library'
     //id "com.scuilion.syntastic" version "0.3.8"
-
 }
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.8.2')
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:30.1.1-jre'
+    implementation name: 'backgammon-gui'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'backgammon.App'
-}
-
-tasks.named('test') {
-    // Use JUnit Platform for unit tests.
-    useJUnitPlatform()
+    //mainClass = 'backgammon.App'
+    mainClass = 'test.Test2'
 }
 
 test {
 	useJUnitPlatform()
         maxHeapSize = '1G'
         testLogging {
-		events "failed"
-		exceptionFormat "full"
-                showStandardStreams = true }
+        events "failed"
+        exceptionFormat "full"
+        showStandardStreams = true
+        }
 }
 
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
-    //modularity.inferModulePath = true
+    modularity.inferModulePath = true
 }
 
 // Creates Java Docs from the Source
 javadoc {
   source = sourceSets.main.allJava
-  classpath = configurations.compile
+  //classpath = configurations.compile
 }
