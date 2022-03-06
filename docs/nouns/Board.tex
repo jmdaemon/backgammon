@@ -1,0 +1,54 @@
+\section{Board}
+
+\subsection{Facts}
+
+\begin{dashed}
+    \item Has 4 quadrants grouped into sets of 6 points each and a bar.
+    \item Two quadrants are Home Boards, where one belongs to each player. The remaining two make up         the Outer Board.
+    \item The Outer Board consists of points 7 through 18.
+    \item Black chips move clockwise around the Board toward the Black Home.
+    \item Red chips move counterclockwise around the Board toward the Red Home.
+    \item The bar separates the Homes Boards from the Outer Board and can hold any number of chips of        both colours simultaneously.
+    \item A player must move all their chips off the bar before any other move can be made.
+    \item A chip moved off the bar will start from the opponents Home Board.
+    \item Chips can be born off (removed from the Board) once all of their remaining chips are located       within their Home Board.
+    \item Born off chips contribute toward the Home Count so the total remains 15.
+    \item Born off chips are stored in point 25 for black or point 0 for red.
+\end{dashed}
+
+\noindent
+\newline\textbf{Board} - The board is a visual representation of the game. The board will track the number of chips in each Home, the number of chips on the bar and who they belong to, and the number of chips each player has born off. Chips on the Board with legal moves will be highlighted if there are any. The board will manage the movement of chips around the board.
+
+\begin{multicols}{2}
+    \begin{dashed}
+        \subsection{Attributes}
+        \item black home count
+        \item red home count
+        \item black bar count
+        \item red bar count
+        \item chip tracker [26]
+        \item point colour [26]
+    \end{dashed}
+
+    \begin{dashed}
+        \subsection{Behaviour}
+        \item \java{moveTo}
+        \item \java{getHomeCount}
+        \item \java{getBarCount}
+        \item \java{getChipCountAt}
+        \item \java{getPointColourAt}
+    \end{dashed}
+\end{multicols}
+
+\subsection{Collaborations}
+\begin{dashed}
+    \item \textbf{Game} needs to co-operate with \textbf{Board} to generate a list of valid moves.
+    \item The \textbf{UI} and \textbf{Board} need to co-operate in order to move chips.
+    \item The \textbf{Board} and \textbf{UI} need to co-operate in order to \textbf{undo} moves.
+    \item \textbf{Game} and \textbf{Board} need o co-operate in order to consume dice after moves.
+\end{dashed}
+
+\subsection{Other Notes}
+\begin{dashed}
+    \item Born off chips contribute to \java{getHomeCount}, not its respective attribute.
+\end{dashed}
