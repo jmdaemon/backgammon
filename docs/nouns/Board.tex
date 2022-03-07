@@ -4,22 +4,20 @@
 
 \begin{dashed}
     \item Has 4 quadrants grouped into sets of 6 points each and a bar.
-    \item Two quadrants are Home Boards, where one belongs to each player. The remaining two make up the Outer Board.
+    \item Two quadrants are Home Boards, where one belongs to each player. The remaining two make up         the Outer Board.
     \item The Outer Board consists of points 7 through 18.
     \item Black chips move clockwise around the Board toward the Black Home.
     \item Red chips move counterclockwise around the Board toward the Red Home.
-    \item The bar separates the Homes Boards from the Outer Board and can hold any number of chips of both colours simultaneously.
+    \item The bar separates the Homes Boards from the Outer Board and can hold any number of chips of        both colours simultaneously.
     \item A player must move all their chips off the bar before any other move can be made.
-    \item A chip moved off the bar will start from the most counterclockwise position in the opponents Home Board.
-    \item All chips belonging to a player with at least one legal move will be highlighted and available to move after the dice are rolled
-    \item Moving a chip adds it at a new point and removes it from its initial point.
-    \item Moving to a blot causes the opposing player’s chip to move to the bar.
-    \item Chips can be born off (removed from the Board) once all of their remaining chips are located within their Home Board.
+    \item A chip moved off the bar will start from the opponents Home Board.
+    \item Chips can be born off (removed from the Board) once all of their remaining chips are located       within their Home Board.
     \item Born off chips contribute toward the Home Count so the total remains 15.
     \item Born off chips are stored in point 25 for black or point 0 for red.
 \end{dashed}
 
-\noindent{\newline \textbf{Board} - The board is a visual representation of the game. The board will track the number of chips in each Home, the number of chips on the bar and who they belong to, and the number of chips each player has born off. Chips on the Board with legal moves will be highlighted if there are any. The board will manage the movement of chips around the board.}
+\noindent
+\newline\textbf{Board} - The board is a visual representation of the game. The board will track the number of chips in each Home, the number of chips on the bar and who they belong to, and the number of chips each player has born off. Chips on the Board with legal moves will be highlighted if there are any. The board will manage the movement of chips around the board.
 
 \begin{multicols}{2}
     \begin{dashed}
@@ -34,30 +32,23 @@
 
     \begin{dashed}
         \subsection{Behaviour}
-        \item \textbf{moveTo}
-        \item \textbf{getHomeCount}
-        \item \textbf{getBarCount}
-        \item \textbf{getChipCountAt}
-        \item \textbf{getPointColourAt}
+        \item \java{moveTo}
+        \item \java{getHomeCount}
+        \item \java{getBarCount}
+        \item \java{getChipCountAt}
+        \item \java{getPointColourAt}
     \end{dashed}
 \end{multicols}
 
 \subsection{Collaborations}
-
 \begin{dashed}
-    \item The \textbf{UI} will display the possible moves by asking \textbf{Game} to calculate them using chip locations from \textbf{Board} and the dice from \textbf{Die}.
+    \item \textbf{Game} needs to co-operate with \textbf{Board} to generate a list of valid moves.
     \item The \textbf{UI} and \textbf{Board} need to co-operate in order to move chips.
-    \item The \textbf{Board} and \textbf{Game} need to co-operate in order to \textbf{undo} moves.
+    \item The \textbf{Board} and \textbf{UI} need to co-operate in order to \textbf{undo} moves.
+    \item \textbf{Game} and \textbf{Board} need o co-operate in order to consume dice after moves.
 \end{dashed}
 
 \subsection{Other Notes}
-
 \begin{dashed}
-    \item Born off chips contribute to \textbf{getHomeCount}, not its respective attribute.
+    \item Born off chips contribute to \java{getHomeCount}, not its respective attribute.
 \end{dashed}
-
-\subsection{Summary}
-
-Board deals with the positions of the chips for either player, and determines if they can be moved
-to certain points on the board.
-

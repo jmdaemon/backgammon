@@ -5,13 +5,17 @@
 \usepackage[english]{babel}
 \usepackage{multicol}
 \usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage[cachedir=build/minted_pymint,outputdir=build]{minted}
 
 \newlist{dashed}{itemize}{3}
 \setlist[dashed, 1]
 {label=\textendash, nosep,
     leftmargin=\parindent,
-    rightmargin=10pt
+    rightmargin=10pt,
+    itemsep=2pt,
+    parsep=2pt
 }
 
 \newcommand\java[1] {
@@ -20,11 +24,13 @@
 
 \begin{document}
 
-\input{cover}
+\input{Cover}
 \tableofcontents
 
 \chapter{Introduction}
 
+The goal of this project is to write programs to play backgammon. The game
+itself is described in Appendix A.
 This is an initial draft for a CPSC 101 for the Winter 2022 semester by Team Decaffeinators
 with Joseph Diza as the lead author and developer.  \\
 
@@ -32,73 +38,52 @@ with Joseph Diza as the lead author and developer.  \\
 This document gives a quick \& extremely simplified overview
 of the actual API and design of the Backgammon game.
 
+\input{Contributions}
+
 \chapter{Design Elements}
 
 \section{List of Nouns}
 
 \begin{multicols}{2}
     \begin{itemize}
+        \item Backgammon
         \item Bar
         \item Board
         \item Chip
         \item Computer
         \item Die
+        \item Doubling Cube
     \end{itemize}
 
     \begin{itemize}
-        \item Doubling Cube
+        \item Gammon
         \item Home
+        \item Move
         \item Player
         \item Point
         \item Score
+        \item Single
     \end{itemize}
 \end{multicols}
 
 \chapter{Noun Entries}
 
+\input{nouns/Backgammon}
 \input{nouns/Bar}
 \input{nouns/Board}
 \input{nouns/Chip}
 \input{nouns/Computer}
 \input{nouns/Die}
-
 \input{nouns/DoublingCube}
+
+\input{nouns/Gammon}
 \input{nouns/Home}
+\input{nouns/Move}
 \input{nouns/Player}
 \input{nouns/Point}
 \input{nouns/Score}
+\input{nouns/Single}
 
-\section{Players}
+\input {Appendix.tex}
 
-\subsection{Facts}
-
-\begin{dashed}
-    \item Roll Dice (Single roll or double roll)
-    \item Decide which chips he wants to move (legally)
-    \item Try to bring all chips in home board and then move it out of the board
-    \item Accept or reject the AI's request to double a dice.
-    \item Pull a request for doubling the dice
-\end{dashed}
-
-\subsection{Attributes}
-
-    \begin{dashed}
-        \item chipColor (String)
-        \item noOfgames (int)
-        \item continueGame (boolean)
-    \end{dashed}
-
-\subsection{Behaviours}
-
-    \begin{dashed}
-        \item Store chip color
-        \item Store set of games
-        \item Ask for continuing or ending the game
-    \end{dashed}
-
-\subsection{Collaborations}
-
-    \begin{dashed}
-        \item Collaborate with engine to suggest moves of the selected chip
-    \end{dashed}
 \end{document}

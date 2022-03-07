@@ -6,15 +6,27 @@
     \item Chips move clockwise around the board to their Home Board.
     \item A single chip of either colour belongs to each player.
     \item The chip belonging to the player is referenced 15 times.
+    \item Can hold chips of both colours simultaneously and has no limit to the number of chips it can hold.
 \end{dashed}
+
+\noindent
+\newline\textbf{Chip} - A chip is a piece on the board that belongs to one of the players. They are either black or red and move clockwise around the board in the direction of the player's Home Board.
 
 \subsection{Attribute}
 \begin{dashed}
-    \item Colour
+    \item colour
 \end{dashed}
 
-\subsection{Attribute}
+\subsection{Behaviour}
 \begin{dashed}
     \item getColour
 \end{dashed}
 
+\subsection{Collaborations}
+\begin{dashed}
+    \item Co-operates with board to determine chip locations.
+\end{dashed}
+
+\subsection{Summary}
+Due to the need to keep track of the chip location, a method maybe needed to update how many chips
+are on a pointer.
