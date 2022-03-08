@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Backgammon {
+  // The game board is laid out according to the following:
+  // Bar1   Bar2    Points [6,      6,      6,    6]    BearOffPoint
+  // 26     25              24-18   18-12   12-6  6-1   0
+
+
   public static List<List<Integer>> genDoubles(int[] dice) {
     List<List<Integer>> doubles = new ArrayList<>();
     int die = dice[0];
@@ -45,12 +50,8 @@ public class Backgammon {
 
   // Gets the location of the furthest point away from home for the player
   public static int getFurthestFromHome(int board[]) {
-    //int[] home = new int [7];
     int[] home = new int [6];
     for (int i = home.length - 1; i > 0; i--) {
-    //for (int i = home.length; i > 0; --i) {
-    //for (int i = home.length - 1; i > 0; i--) {
-      //home[i] = board[board.length - (i + 1)];
       home[i] = board[board.length - i];
     }
     for (int i = 0; i < home.length; i++) {
@@ -61,7 +62,6 @@ public class Backgammon {
 
   public static boolean canBearOff(int board[]) {
     for (int i = 0; i < board.length; i++) {
-      //int startOfHome = i % 18;
       if (i > 0)
         return false;
       if (i == 18) // Start of home
@@ -143,17 +143,12 @@ public class Backgammon {
 
   public static List<String> calcBearOff(int[] board, int[] dice) {
     List<String> moves = new ArrayList<>();
-    int bearOffAt = 0;
-    int homeStart = 19;
-    //int homeStart = 20;
+    final int bearOffAt = 0;
+    final int homeStart = 19;
+    final int numPoints = 24;
     // Assume the player is bearing off
-    //for (int i = 17; i < board.length; i++) {
     for (int index = homeStart; index < board.length; index++) {
-      //int src = 25 - i;
-      //int src = 26 - i;
-      int src = 24 - index;
-    //for (int src = 6; src > 0; src++) {
-      //for (int i = 0; i < dice.length; i++) {
+      int src = numPoints - index;
       for (int j = 0; j < dice.length; j++) {
         int die = dice[j];
         int dest = src - die;
