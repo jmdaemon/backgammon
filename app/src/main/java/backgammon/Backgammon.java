@@ -172,6 +172,93 @@ public class Backgammon {
     return moves;
   }
 
+  public static List<String> calcBarMove(int[] board, int src, int[] dice) {
+    List<String> moves = new ArrayList<>();
+    //int temp = src;
+    for (int i = 0; i < dice.length; i++) {
+      int dest = src - dice[i];
+      int boardDest = board.length - src;
+      String move = null;
+      if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+        // Add the move
+        move = src + "-" + dest;
+        move += (board[boardDest] == -1) ? "x" : ""; // If there is a blot
+        moves.add(move);
+      }
+    }
+
+    if (dice[0] > dice[1]) {
+      // Return the higher roll
+      moves.remove(1);
+    } else if (dice[1] > dice[0]) {
+      moves.remove(0);
+    } else if (dice.length == 2) {
+      // Doubles
+      moves.remove(0);
+    }
+    // Now we must find the greatest difference between the initial and fist positions of either list
+    //for (int i = 0; i < moves.size(); i++) {
+    //}
+
+
+      // Assume that there are no mixed to be born off.
+      //if (dest < board.length - 1) {
+        //// If the opponent isn't blocking the player at the destination
+        //if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+          //// Add the move
+          //move = src + "-" + dest;
+          //move += (board[boardDest] == -1) ? "x" : ""; // If there is a blot
+          //moves.add(move);
+
+          //// Now check for the combined play
+          //src = dest; // Assume we have made the play and are now at the dest.
+          //boardDest = board.length - src;
+          //dice = swap(dice, 0, 1); // Swap 4 with 2
+          //dest = src - dice[0];
+          //if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+            //move = move + "-" + dest;
+            //move += (board[boardDest] == -1) ? "x" : "";
+            //moves.add(move);
+          //}
+        //}
+      //}
+      //src = temp; // Reset src back to the initial position
+    //}
+
+    //for (int i = 0; i < dice.length; i++) {
+      //int die = dice[i];
+      ////int dest = src - offsets.get(j);
+      //int dest = src - die;
+      //int boardDest = board.length - src;
+      //String move = null;
+
+      //// Bearing off
+      //if (dest == 0) {
+        //move = src + "-" + dest;
+        //move += (board[boardDest] == -1) ? "x" : "";
+        //moves.add(move);
+      //} else if (dest < 0) {
+        //// Rule: If the roll will overshoot piece from home, but it is on the
+        //// farthest point away from home, it can bear off
+        //int furthestPoint = getFurthestFromHome(board);
+        //if (src == furthestPoint) {
+          //move = src + "-" + dest;
+          //move += (board[boardDest] == -1) ? "x" : "";
+          //moves.add(move);
+        //}
+      //}
+      //// Moving
+      //if (board[boardDest] >= -2) {
+        //break;
+      //} else {
+        //move = src + "-" + dest;
+        //move += (board[boardDest] == -1) ? "x" : "";
+        //moves.add(move);
+      //}
+    //}
+    return moves;
+  }
+
   public static List<String> calcMove(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
 
