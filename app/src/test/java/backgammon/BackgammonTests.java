@@ -42,6 +42,30 @@ class BackgammonTests {
 
   @Test
   public void canCalculateMoveMixed() {
+    int[] dice = {4, 2};
+    //int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
+    int[] board = {0,0, 0,0,-2,-2,0,0,  0,0,0,0,0,0,  0,1,1,0,0,0,   0,0,0,0,0,0};
+    //List<String> result = Backgammon.calcMove(board, barLocation, dice);
+    //int pieceLocation = 11;
+    //int pieceLocation = 13;
+    int pieceLocation = 11;
+    //int pieceLocation = 13;
+    List<String> result = Backgammon.calcMixed(board, pieceLocation, dice);
+    //List<List<String>> result = Backgammon.calcMixed(board, dice);
+
+    // 11-7,10-8;11-7-5;10-6,11-9;10-6-4.
+    //List<List<String>> expected = Arrays.asList(
+        //Arrays.asList("11-7","10-8"),
+        //Arrays.asList("11-7-5"),
+        //Arrays.asList("10-6","11-9"),
+        //Arrays.asList("10-6-4"));
+    List<String> expected = Arrays.asList("11-7", "11-7-5", "11-9", "11-9-5");
+    System.out.println(result);
+    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+  }
+
+  @Test
+  public void canCalculateMoveMixedBar() {
     int[] dice = {5, 3};
     int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
     List<String> result = Backgammon.calcMove(board, barLocation, dice);

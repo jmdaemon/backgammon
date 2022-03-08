@@ -2,6 +2,7 @@ package backgammon;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.Collections;
 import java.util.Arrays;
 import java.util.List;
 
@@ -90,55 +91,130 @@ public class Backgammon {
     return moves;
   }
 
+  public static int[] swap(int[] pair, int i, int j) {
+    // Swap pair[i] with pair[j]
+    int temp = pair[i];
+    pair[i] = pair[j];
+    pair[j] = temp;
+    return pair;
+  }
+
   public static List<String> calcMixed(int[] board, int src, int[] dice) {
+  //public static List<List<String>> calcMixed(int[] board, int[] dice) {
+    // Assume we start with dice: 4, 2
     List<String> moves = new ArrayList<>();
+    //final int pointStart = 2;
+    //List<List<String>> mixed = new ArrayList<>();
+
+    //for (int point = pointStart;  point < board.length; point++) {
+      //int src = board.length - point;
+    int temp = src;
+      for (int i = 0; i < dice.length; i++) {
+        //List<String> moves = new ArrayList<>();
+        //int dest = src + dice[i];
+        //int dest = src - dice[i];
+        int dest = src - dice[0];
+        int boardDest = board.length - src;
+        String move = null;
+
+        // Assume that there are no mixed to be born off.
+        if (dest < board.length - 1) {
+          // If the opponent isn't blocking the player at the destination
+          //if (!(board[dest] >= 2) && board[dest] >= 0) {
+          //if (!(board[boardDest] >= 2) && board[boardDest] >= 0) {
+          if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+            // Add the move
+            //move = src + "-" + dest;
+            move = src + "-" + dest;
+            //move += (board[dest] == 1) ? "x" : "";
+            //move += (board[boardDest] == 1) ? "x" : "";
+            move += (board[boardDest] == -1) ? "x" : "";
+            //mixed.add(move);
+            moves.add(move);
+
+            // Check for the combined play
+            src = dest; // Assume we have made the play and are now at the dest.
+            boardDest = board.length - src;
+            //dest = src - dice[1];
+            //dest = src + dice[1];
+            //dice = swap(dice, 0, 1); // Swap 5 with 4
+            dice = swap(dice, 0, 1); // Swap 4 with 2
+            //dice = swap(dice, 1, 0); // Swap 5 with 4
+            //dest = src + dice[0];
+            //dest = src - dice[0];
+            //dest = src - dice[i];
+            //dest = src - dice[0];
+            //dest = src - dice[1];
+            //dest = src - dice[i % 1];
+            dest = src - dice[0];
+            //dest = src - dice[1];
+            //if (!(board[dest] >= 2) && board[dest] >= 0) {
+          if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+                //move = src + "-" + dest;
+                move = move + "-" + dest;
+                //move += (board[dest] == 1) ? "x" : "";
+                //move += (board[boardDest] == 1) ? "x" : "";
+                move += (board[boardDest] == -1) ? "x" : "";
+                //mixed.add(move);
+                moves.add(move);
+            }
+            //dice = swap(dice, 0, 1); // Swap them back
+            //dice = swap(dice, 1, 0); // Swap them back
+          }
+        }
+        //mixed.add(moves);
+        src = temp; // Reset src back to the initial position
+      }
+    //}
+    //return mixed;
+    return moves;
     // First case: 5
     //int dest = src - dice[0];
-    int dest = src + dice[0];
-    String move = null;
-    //if (!(board[dest] >= 2) && board[dest] >= 0) {
-    if (dest < board.length - 1) {
-      if (!(board[dest] >= 2) && board[dest] >= 0) {
-          move = src + "-" + dest;
-          move += (board[dest] == 1) ? "x" : "";
-          moves.add(move);
-          src = dest; // Update src
-          // Check combined
-          // Second case: 4
-          //dest = src - dice[1];
-          dest = src + dice[1];
-          if (!(board[dest] >= 2) && board[dest] >= 0) {
-              //move = src + "-" + dest;
-              move = move + "-" + dest;
-              move += (board[dest] == 1) ? "x" : "";
-              moves.add(move);
-          }
+    //int dest = src + dice[0];
+    //String move = null;
+    ////if (!(board[dest] >= 2) && board[dest] >= 0) {
+    //if (dest < board.length - 1) {
+      //if (!(board[dest] >= 2) && board[dest] >= 0) {
+          //move = src + "-" + dest;
+          //move += (board[dest] == 1) ? "x" : "";
+          //moves.add(move);
+          //src = dest; // Update src
+          //// Check combined
+          //// Second case: 4
+          ////dest = src - dice[1];
+          //dest = src + dice[1];
+          //if (!(board[dest] >= 2) && board[dest] >= 0) {
+              ////move = src + "-" + dest;
+              //move = move + "-" + dest;
+              //move += (board[dest] == 1) ? "x" : "";
+              //moves.add(move);
+          //}
 
-      }
-    }
+      //}
+    //}
 
-    // Second Case 4:
-    //dest = src - dice[1];
-    if (dest < board.length - 1) {
-      dest = src + dice[1];
-      if ((dest < board.length) && !(board[dest] >= 2) && board[dest] >= 0) {
-          move = src + "-" + dest;
-          move += (board[dest] == 1) ? "x" : "";
-          moves.add(move);
-          src = dest; // Update src
-          // Check combined
-          // case: 5
-          //dest = src - dice[0];
-          dest = src + dice[0];
-          if (!(board[dest] >= 2) && board[dest] >= 0) {
-              //move = src + "-" + dest;
-              move = move + "-" + dest;
-              move += (board[dest] == 1) ? "x" : "";
-              moves.add(move);
-          }
-      }
-    }
-    return moves;
+    //// Second Case 4:
+    ////dest = src - dice[1];
+    //if (dest < board.length - 1) {
+      //dest = src + dice[1];
+      //if ((dest < board.length) && !(board[dest] >= 2) && board[dest] >= 0) {
+          //move = src + "-" + dest;
+          //move += (board[dest] == 1) ? "x" : "";
+          //moves.add(move);
+          //src = dest; // Update src
+          //// Check combined
+          //// case: 5
+          ////dest = src - dice[0];
+          //dest = src + dice[0];
+          //if (!(board[dest] >= 2) && board[dest] >= 0) {
+              ////move = src + "-" + dest;
+              //move = move + "-" + dest;
+              //move += (board[dest] == 1) ? "x" : "";
+              //moves.add(move);
+          //}
+      //}
+    //}
+    //return moves;
   }
 
   public static List<String> calcBearOff(int[] board, int[] dice) {
@@ -254,6 +330,8 @@ public class Backgammon {
         //move = calcMove(board, point, dice);
         // Mixed
         move = calcMixed(board, point, dice);
+        //move = calcMixed(board, dice);
+        //move = calcMixed(board, dice);
         moves.add(move);
       }
     }
