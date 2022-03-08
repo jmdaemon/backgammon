@@ -6,6 +6,13 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BackgammonTests {
+  int barLocation;
+
+  @BeforeEach
+  public void setUp() {
+    barLocation = 25; // Our player's piece is on the bar which is defined as being from 26-25
+  }
+
 
   @Test
   public void canGenerateDoubles() {
@@ -29,37 +36,31 @@ class BackgammonTests {
         Arrays.asList(4),
         Arrays.asList(5, 4),
         Arrays.asList(4, 5));
+    System.out.println(result);
     assertEquals(expected, result, "Should generate mixed offsets");
   }
 
   @Test
   public void canCalculateMoveMixed() {
     int[] dice = {5, 3};
-    //List<List<Integer>> diceOffsets = Backgammon.genMixed(dice);
-    int pieceLocation = 25; // Our player's piece is on the bar
     int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    //int pieceLocation = 1; // Our player's piece is on the bar
-    //List<String> result = Backgammon.calcMove(board, pieceLocation, dice);
-    //List<String> result = Backgammon.calcMove(board, pieceLocation, diceOffsets);
-    List<String> result = Backgammon.calcMove(board, pieceLocation, dice);
+    List<String> result = Backgammon.calcMove(board, barLocation, dice);
     List<String> expected = Arrays.asList("25-20");
+    System.out.println(result);
     assertEquals(expected, result, "Should return only valid legal moves to be played.");
   }
 
   @Test
   public void canCalculateMoveDoubles() {
     int[] dice = {5, 5};
-    //List<List<Integer>> diceOffsets = Backgammon.genDoubles(dice);
-    int pieceLocation = 25; // Our player's piece is on the bar
     int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    //int pieceLocation = 1; // Our player's piece is on the bar
-    //List<String> result = Backgammon.calcMove(board, pieceLocation, diceOffsets);
-    List<String> result = Backgammon.calcMove(board, pieceLocation, dice);
+    List<String> result = Backgammon.calcMove(board, barLocation, dice);
     List<String> expected = Arrays.asList(
         "25-20",
         "25-20-15",
         "25-20-15-10",
         "25-20-15-10-5");
+    System.out.println(result);
     assertEquals(expected, result, "Should return only valid legal moves to be played.");
   }
 
