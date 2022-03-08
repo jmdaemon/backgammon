@@ -44,32 +44,98 @@ public class Backgammon {
   }
 
   //public static List<String> calcMove(int[] board, int src, int[] diceOffsets) {
-  public static List<String> calcMove(int[] board, int src, List<List<Integer>> diceOffsets) {
+  //public static List<String> calcMove(int[] board, int src, List<List<Integer>> diceOffsets) {
+  public static List<String> calcMove(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
-    for (int i = 0; i < diceOffsets.size() - 1; i++) {
-      List<Integer> offsets = diceOffsets.get(i);
 
-      for (int j = 0; j < i; j++) {
-        int dest = src - offsets.get(j);
+    // Doubles
+    if (dice[0] == dice[1]) {
+      int die = dice[0];
+      String move = null;
+      for (int i = 0; i < 4; i++) {
+        int dest = src - die;
         if (board[dest] >= 2)
           break;
-        String move = src + "-" + dest;
+        if (move != null)
+          move = move + "-" + dest;
+        else
+          move = src + "-" + dest;
+
         move += (board[dest] == 1) ? "x" : "";
         moves.add(move);
+        src = dest;
       }
     }
-    moves = moves.stream()
-      .distinct() // Filter duplicates
-      .collect(Collectors.toList());
+
+    return moves;
+
+        //if (move != null && !notDoubles(diceOffsets))
+          //move = move + "-" + src + "-" + dest;
+          //src += ""
+
+      //}
+    //}
+
+
+    // Handle doubles
+    //for (int i = 0; i < diceOffsets.size() - 1; i++) {
+      //List<Integer> offsets = diceOffsets.get(i);
+      //int die = offsets.get(0);
+
+      //String move = null;
+      //for (int j = 0; j < i; j++) {
+        //int destOffsetValue = offsets.get(j);
+        //int numInterMoves = destOffsetValue % die;
+
+        //for (int inter = 0; i < numInterMoves; inter++) {
+        //}
+        //move += src + "-" +
+
+        //int dest = src - offsets.get(j);
+        //if (board[dest] >= 2)
+          //break;
+        //if (move != null && !notDoubles(diceOffsets))
+          //move = move + "-" + src + "-" + dest;
+          ////src += ""
+        //else
+          //move = src + "-" + dest;
+        //move += (board[dest] == 1) ? "x" : "";
+        //moves.add(move);
+        //src = dest;
+      //}
+    //}
+
+
+    //for (int i = 0; i < diceOffsets.size() - 1; i++) {
+      //List<Integer> offsets = diceOffsets.get(i);
+
+      //String move = null;
+      //for (int j = 0; j < i; j++) {
+        //int dest = src - offsets.get(j);
+        //if (board[dest] >= 2)
+          //break;
+        //if (move != null && !notDoubles(diceOffsets))
+          //move = move + "-" + src + "-" + dest;
+          ////src += ""
+        //else
+          //move = src + "-" + dest;
+        //move += (board[dest] == 1) ? "x" : "";
+        //moves.add(move);
+        //src = dest;
+      //}
+    //}
+    //moves = moves.stream()
+      //.distinct() // Filter duplicates
+      //.collect(Collectors.toList());
 
     // If we are given two choices: [25-22, 25-20]
     // We can only pick the highest choice.
-    if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+    //if ((moves.size() > 1) && notDoubles(diceOffsets)) {
       // Since our sets are ordered properly, this will
       // remove the lower choice from our set for bar moves
-      moves.remove(0);
-    }
-    return moves;
+      //moves.remove(0);
+    //}
+    //return moves;
     //for (int i : diceOffsets) {
       ////int dest = i + src;
       //int dest = src - i;
