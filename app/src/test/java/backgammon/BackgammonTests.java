@@ -70,11 +70,11 @@ class BackgammonTests {
   public void canCalculateBearOffMove() {
     int[] dice = {4, 3};
     //int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    int bearOffLocation = 4;
     int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
     //List<List<String>> result = Backgammon.calcAllMoves(board, dice);
-    List<String> result = Backgammon.calcBearOff(board, bearOffLocation, dice);
-    List<String> expected = Arrays.asList(("4-0"));
+    List<String> result = Backgammon.calcBearOff(board, dice);
+    List<String> expected = Arrays.asList("4-0", "3-0");
+    System.out.println(result);
     assertEquals(expected, result, "Should calculate a move to bear off");
   }
 

@@ -45,8 +45,12 @@ public class Backgammon {
 
   // Gets the location of the furthest point away from home for the player
   public static int getFurthestFromHome(int board[]) {
+    //int[] home = new int [7];
     int[] home = new int [6];
-    for (int i = home.length; i > 0; i--) {
+    for (int i = home.length - 1; i > 0; i--) {
+    //for (int i = home.length; i > 0; --i) {
+    //for (int i = home.length - 1; i > 0; i--) {
+      //home[i] = board[board.length - (i + 1)];
       home[i] = board[board.length - i];
     }
     for (int i = 0; i < home.length; i++) {
@@ -137,36 +141,40 @@ public class Backgammon {
     return moves;
   }
 
-  public static List<String> calcBearOff(int[] board, int src, int[] dice) {
+  public static List<String> calcBearOff(int[] board, int[] dice) {
     List<String> moves = new ArrayList<>();
-    //int dest = src + dice[0];
-    int dest = src - dice[0];
-    //int bearOffAt = -1;
     int bearOffAt = 0;
-    String move;
-    if (dest == bearOffAt) {
-      move = src + "-" + dest;
-      move += (board[dest] == 1) ? "x" : "";
-      moves.add(move);
+    int homeStart = 19;
+    //int homeStart = 20;
+    // Assume the player is bearing off
+    //for (int i = 17; i < board.length; i++) {
+    for (int index = homeStart; index < board.length; index++) {
+      //int src = 25 - i;
+      //int src = 26 - i;
+      int src = 24 - index;
+    //for (int src = 6; src > 0; src++) {
+      //for (int i = 0; i < dice.length; i++) {
+      for (int j = 0; j < dice.length; j++) {
+        int die = dice[j];
+        int dest = src - die;
 
-      //src = dest;
-      // Check other roll
-      //dest = src + dice[1];
-      //if (!(board[dest] >= 2) && board[dest] >= 0) {
-          ////move = src + "-" + dest;
-          //move = move + "-" + dest;
-          //move += (board[dest] == 1) ? "x" : "";
-          //moves.add(move);
-      //}
-    } else if (dest < bearOffAt) {
-        int furthestPoint = getFurthestFromHome(board);
-        if (src == furthestPoint) {
+        String move = null;
+        if (dest == bearOffAt) {
           move = src + "-" + dest;
           move += (board[dest] == 1) ? "x" : "";
           moves.add(move);
+        } else if (dest < bearOffAt) {
+          // Rule: If the roll will overshoot piece from home, but it is on the
+          // farthest point away from home, it can bear off
+          int furthestPoint = getFurthestFromHome(board);
+          if (src == furthestPoint) {
+            move = src + "-" + dest;
+            move += (board[dest] == 1) ? "x" : "";
+            moves.add(move);
+          }
         }
+      }
     }
-
     return moves;
   }
 
@@ -238,7 +246,8 @@ public class Backgammon {
 
         // Bearing Off
         if (canBearOff(board)) {
-          move = Backgammon.calcBearOff(board, point, dice);
+          //move = Backgammon.calcBearOff(board, point, dice);
+          move = Backgammon.calcBearOff(board, dice);
           moves.add(move);
         }
 
