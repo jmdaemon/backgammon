@@ -41,6 +41,12 @@ public class Backgammon {
         Arrays.asList(dice[1], dice[0]));
     return mixed;
   }
+  // Arrays are stored from zero-index:
+  // index 0, 1, 2, 3 .. 25
+  // 0: Leftmost, 25: Rightmost
+  // *Note* that these are the inverse of each other
+  // *Note* that the highest array index is one less than the
+  // total number of points (26 including both Bar and born off point).
 
   public static boolean notDoubles(List<List<Integer>> diceOffsets) {
     List<Integer> firstOffset = diceOffsets.get(0);
@@ -218,9 +224,6 @@ public class Backgammon {
     return moves;
   }
 
-  // Array are stored:
-  // index 0, 1, 2, 3 .. 25
-  // 0: Leftmost, 25: Rightmost
   public static List<List<String>> calcAllMoves(int[] board, int[] dice) {
     List<List<String>> moves = new ArrayList<>();
     // Note that if this doesn't work, split the loop in two to cover both the bar, and the points
@@ -229,6 +232,7 @@ public class Backgammon {
       int piecesAt = board[point];
       // Assume we're calculating the moves for the user player
       if (piecesAt > 0) {
+        // Prompt for a new move
         List<String> move = new ArrayList<>();
 
         // Bearing Off
@@ -243,11 +247,8 @@ public class Backgammon {
           move = Backgammon.calcDouble(board, point, dice);
           moves.add(move);
         }
-        //move = calcMove(board, point, dice);
         // Mixed
         move = calcMixed(board, point, dice);
-        //move = calcMixed(board, dice);
-        //move = calcMixed(board, dice);
         moves.add(move);
       }
     }
