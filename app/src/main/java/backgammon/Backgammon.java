@@ -10,6 +10,12 @@ public class Backgammon {
   // Bar1   Bar2    Points [6,      6,      6,    6]    BearOffPoint
   // 26     25              24-18   18-12   12-6  6-1   0
 
+  // Arrays are stored from zero-index:
+  // index 0, 1, 2, 3 .. 25
+  // 0: Leftmost, 25: Rightmost
+  // *Note* that these are the inverse of each other
+  // *Note* that the highest array index is one less than the
+  // total number of points (26 including both Bar and born off point).
 
   public static List<List<Integer>> genDoubles(int[] dice) {
     List<List<Integer>> doubles = new ArrayList<>();
@@ -25,8 +31,8 @@ public class Backgammon {
     for (int i = 0; i < 4; i++) {
       List<Integer> offset = Arrays.asList(intDoubles[i]);
       offset = offset.stream()
-        .filter(x -> x != null)
-        .collect(Collectors.toList());
+          .filter(x -> x != null)
+          .collect(Collectors.toList());
       doubles.add(offset);
     }
     return doubles;
@@ -41,12 +47,6 @@ public class Backgammon {
         Arrays.asList(dice[1], dice[0]));
     return mixed;
   }
-  // Arrays are stored from zero-index:
-  // index 0, 1, 2, 3 .. 25
-  // 0: Leftmost, 25: Rightmost
-  // *Note* that these are the inverse of each other
-  // *Note* that the highest array index is one less than the
-  // total number of points (26 including both Bar and born off point).
 
   public static boolean notDoubles(List<List<Integer>> diceOffsets) {
     List<Integer> firstOffset = diceOffsets.get(0);
@@ -56,12 +56,13 @@ public class Backgammon {
 
   // Gets the location of the furthest point away from home for the player
   public static int getFurthestFromHome(int board[]) {
-    int[] home = new int [6];
+    int[] home = new int[6];
     for (int i = home.length - 1; i > 0; i--) {
       home[i] = board[board.length - i];
     }
     for (int i = 0; i < home.length; i++) {
-      if (i > 0) return board.length - i;
+      if (i > 0)
+        return board.length - i;
     }
     return 0;
   }
@@ -108,34 +109,34 @@ public class Backgammon {
     // Assume we start with dice: 4, 2
     List<String> moves = new ArrayList<>();
     int temp = src;
-      for (int i = 0; i < dice.length; i++) {
-        int dest = src - dice[0];
-        int boardDest = board.length - src;
-        String move = null;
+    for (int i = 0; i < dice.length; i++) {
+      int dest = src - dice[0];
+      int boardDest = board.length - src;
+      String move = null;
 
-        // Assume that there are no mixed to be born off.
-        if (dest < board.length - 1) {
-          // If the opponent isn't blocking the player at the destination
+      // Assume that there are no mixed to be born off.
+      if (dest < board.length - 1) {
+        // If the opponent isn't blocking the player at the destination
+        if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+          // Add the move
+          move = src + "-" + dest;
+          move += (board[boardDest] == -1) ? "x" : ""; // If there is a blot
+          moves.add(move);
+
+          // Now check for the combined play
+          src = dest; // Assume we have made the play and are now at the dest.
+          boardDest = board.length - src;
+          dice = swap(dice, 0, 1); // Swap 4 with 2
+          dest = src - dice[0];
           if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
-            // Add the move
-            move = src + "-" + dest;
-            move += (board[boardDest] == -1) ? "x" : ""; // If there is a blot
+            move = move + "-" + dest;
+            move += (board[boardDest] == -1) ? "x" : "";
             moves.add(move);
-
-            // Now check for the combined play
-            src = dest; // Assume we have made the play and are now at the dest.
-            boardDest = board.length - src;
-            dice = swap(dice, 0, 1); // Swap 4 with 2
-            dest = src - dice[0];
-          if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
-                move = move + "-" + dest;
-                move += (board[boardDest] == -1) ? "x" : "";
-                moves.add(move);
-            }
           }
         }
-        src = temp; // Reset src back to the initial position
       }
+      src = temp; // Reset src back to the initial position
+    }
     return moves;
   }
 
@@ -179,7 +180,7 @@ public class Backgammon {
     for (int i = 0; i < diceOffsets.size() - 1; i++) {
       List<Integer> offsets = diceOffsets.get(i);
       for (int j = 0; j < i; j++) {
-        //int dest = src - offsets.get(j);
+        // int dest = src - offsets.get(j);
         int dest = src - offsets.get(j);
         String move = null;
         // Bearing off
@@ -196,7 +197,7 @@ public class Backgammon {
             move += (board[dest] == 1) ? "x" : "";
             moves.add(move);
           }
-          //move = src + "-" + dest;
+          // move = src + "-" + dest;
         }
         // Moving
         if (board[dest] >= 2) {
@@ -206,16 +207,16 @@ public class Backgammon {
           move += (board[dest] == 1) ? "x" : "";
           moves.add(move);
         }
-        //src = dest;
-        }
+        // src = dest;
+      }
     }
     moves = moves.stream()
-      .distinct() // Filter duplicates
-      .collect(Collectors.toList());
+        .distinct() // Filter duplicates
+        .collect(Collectors.toList());
 
     // If we are given two choices: [25-22, 25-20]
     // We can only pick the highest choice.
-    //if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+    // if ((moves.size() > 1) && notDoubles(diceOffsets)) {
     if (moves.size() > 1) {
       // Since our sets are ordered properly, this will
       // remove the lower choice from our set for bar moves
@@ -226,8 +227,9 @@ public class Backgammon {
 
   public static List<List<String>> calcAllMoves(int[] board, int[] dice) {
     List<List<String>> moves = new ArrayList<>();
-    // Note that if this doesn't work, split the loop in two to cover both the bar, and the points
-    //for (int point = 25; point > 0; point--) {
+    // Note that if this doesn't work, split the loop in two to cover both the bar,
+    // and the points
+    // for (int point = 25; point > 0; point--) {
     for (int point = 0; point < board.length; point++) {
       int piecesAt = board[point];
       // Assume we're calculating the moves for the user player
@@ -237,7 +239,7 @@ public class Backgammon {
 
         // Bearing Off
         if (canBearOff(board)) {
-          //move = Backgammon.calcBearOff(board, point, dice);
+          // move = Backgammon.calcBearOff(board, point, dice);
           move = Backgammon.calcBearOff(board, dice);
           moves.add(move);
         }
