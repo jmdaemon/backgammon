@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BackgammonTests {
 
-  //public void display(List<List<Integer>> moves) {
-    //for (List<Integer> move : moves)
-  //}
-
   @Test
   public void canGenerateDoubles() {
     int[] dice = {6, 6, 6, 6};
@@ -20,9 +16,7 @@ class BackgammonTests {
         Arrays.asList(6, 12),
         Arrays.asList(6, 12, 18),
         Arrays.asList(6, 12, 18, 24));
-    System.out.println(result);
+    System.out.println(result); // Always display the result
     assertEquals(expected, result, "Should generate double offsets");
-    //assertNotNull(result, "Should generate doubles");
-    //assertNotNull(null, "Should generate doubles");
   }
 }
