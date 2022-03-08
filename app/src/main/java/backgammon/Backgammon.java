@@ -59,28 +59,29 @@ public class Backgammon {
     //return false;
   //}
 
+  public static List<String> calcDouble(int[] board, int src, int[] dice) {
+    List<String> moves = new ArrayList<>();
+    int die = dice[0];
+    String move = null;
+    for (int i = 0; i < 4; i++) {
+      int dest = src - die;
+      if (board[dest] >= 2)
+        break;
+      if (move != null)
+        move = move + "-" + dest;
+      else
+        move = src + "-" + dest;
+
+      move += (board[dest] == 1) ? "x" : "";
+      moves.add(move);
+      src = dest;
+    }
+    return moves;
+  }
+
   public static List<String> calcMove(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
 
-    // Doubles
-    if (dice[0] == dice[1]) {
-      int die = dice[0];
-      String move = null;
-      for (int i = 0; i < 4; i++) {
-        int dest = src - die;
-        if (board[dest] >= 2)
-          break;
-        if (move != null)
-          move = move + "-" + dest;
-        else
-          move = src + "-" + dest;
-
-        move += (board[dest] == 1) ? "x" : "";
-        moves.add(move);
-        src = dest;
-      }
-      return moves;
-    }
     // Mixed
     List<List<Integer>> diceOffsets = genMixed(dice);
     for (int i = 0; i < diceOffsets.size() - 1; i++) {
@@ -136,10 +137,15 @@ public class Backgammon {
     // Note that if this doesn't work, split the loop in two to cover both the bar, and the points
     for (int point = 25; point > 0; point--) {
     //for (int point = 0; point < board.length; point++) {
-      // Hardcode calculation for player
       int piecesAt = board[point];
+      // Assume we're calculating the moves for the user player
       if (piecesAt > 0) {
-        List<String> move = calcMove(board, point, dice);
+        // Doubles
+        List<String> move = new ArrayList<>();
+        if (dice[0] == dice[1]) {
+          move = Backgammon.calcDouble(board, point, dice);
+        }
+        move = calcMove(board, point, dice);
         moves.add(move);
       }
     }
