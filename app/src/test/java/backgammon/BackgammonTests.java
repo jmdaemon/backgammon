@@ -32,23 +32,24 @@ class BackgammonTests {
     assertEquals(expected, result, "Should generate mixed offsets");
   }
 
-  //@Test
-  //public void canCalculateMoveMixed() {
-    //int[] dice = {5, 3};
+  @Test
+  public void canCalculateMoveMixed() {
+    int[] dice = {5, 3};
     //List<List<Integer>> diceOffsets = Backgammon.genMixed(dice);
-    //int pieceLocation = 25; // Our player's piece is on the bar
-    //int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    ////int pieceLocation = 1; // Our player's piece is on the bar
-    ////List<String> result = Backgammon.calcMove(board, pieceLocation, dice);
+    int pieceLocation = 25; // Our player's piece is on the bar
+    int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
+    //int pieceLocation = 1; // Our player's piece is on the bar
+    //List<String> result = Backgammon.calcMove(board, pieceLocation, dice);
     //List<String> result = Backgammon.calcMove(board, pieceLocation, diceOffsets);
-    //List<String> expected = Arrays.asList("25-20");
-    //assertEquals(expected, result, "Should return only valid legal moves to be played.");
-  //}
+    List<String> result = Backgammon.calcMove(board, pieceLocation, dice);
+    List<String> expected = Arrays.asList("25-20");
+    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+  }
 
   @Test
   public void canCalculateMoveDoubles() {
     int[] dice = {5, 5};
-    List<List<Integer>> diceOffsets = Backgammon.genDoubles(dice);
+    //List<List<Integer>> diceOffsets = Backgammon.genDoubles(dice);
     int pieceLocation = 25; // Our player's piece is on the bar
     int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
     //int pieceLocation = 1; // Our player's piece is on the bar

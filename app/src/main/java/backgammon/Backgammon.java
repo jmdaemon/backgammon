@@ -65,9 +65,42 @@ public class Backgammon {
         moves.add(move);
         src = dest;
       }
+      return moves;
     }
+    // Mixed
+    List<List<Integer>> diceOffsets = genMixed(dice);
+    //for (int i = 0 ; i < dice.length; i++) {
+    for (int i = 0; i < diceOffsets.size() - 1; i++) {
+      List<Integer> offsets = diceOffsets.get(i);
+      for (int j = 0; j < i; j++) {
+        //int dest = i + src;
+        int dest = src - offsets.get(j);
+        String move = null;
+        if (board[dest] >= 2) {
+          break;
+        }
+        move = src + "-" + dest;
+        move += (board[dest] == 1) ? "x" : "";
+        moves.add(move);
+        //else if (board[dest] == 1) {
+          //move = src + "-" + dest + "x";
+        //} else
+          //move = src + "-" + dest;
+        }
+    }
+    moves = moves.stream()
+      .distinct() // Filter duplicates
+      .collect(Collectors.toList());
 
+    // If we are given two choices: [25-22, 25-20]
+    // We can only pick the highest choice.
+    if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+      // Since our sets are ordered properly, this will
+      // remove the lower choice from our set for bar moves
+      moves.remove(0);
+    }
     return moves;
+
 
         //if (move != null && !notDoubles(diceOffsets))
           //move = move + "-" + src + "-" + dest;
