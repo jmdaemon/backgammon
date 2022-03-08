@@ -19,4 +19,16 @@ class BackgammonTests {
     System.out.println(result); // Always display the result
     assertEquals(expected, result, "Should generate double offsets");
   }
+
+  @Test
+  public void canGenerateMixed() {
+    int[] dice = {5, 4};
+    List<List<Integer>> result = Backgammon.genMixed(dice);
+    List<List<Integer>> expected = Arrays.asList(
+        Arrays.asList(5),
+        Arrays.asList(4),
+        Arrays.asList(5, 4),
+        Arrays.asList(4, 5));
+    assertEquals(expected, result, "Should generate mixed offsets");
+  }
 }

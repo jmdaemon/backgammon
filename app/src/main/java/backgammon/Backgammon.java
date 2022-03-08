@@ -9,7 +9,7 @@ public class Backgammon {
   public static List<List<Integer>> genDoubles(int[] dice) {
     List<List<Integer>> doubles = new ArrayList<>();
     int die = dice[0];
-    // Creates a nested jagged array: [[6], [6,12], [6,12,18], [6,12,18,24]]
+    // Creates a nested jagged array:e.g [[6], [6,12], [6,12,18], [6,12,18,24]]
     Integer[][] intDoubles = new Integer[4][4];
     for (int i = 0; i < 4; i++) {
       for (int j = 0; j <= i; j++) {
@@ -25,5 +25,15 @@ public class Backgammon {
       doubles.add(offset);
     }
     return doubles;
+  }
+
+  public static List<List<Integer>> genMixed(int[] dice) {
+    // Enumerate all possibilities
+    List<List<Integer>> mixed = Arrays.asList(
+        Arrays.asList(dice[0]),
+        Arrays.asList(dice[1]),
+        Arrays.asList(dice[0], dice[1]),
+        Arrays.asList(dice[1], dice[0]));
+    return mixed;
   }
 }
