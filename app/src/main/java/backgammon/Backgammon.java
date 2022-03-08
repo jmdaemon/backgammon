@@ -127,61 +127,6 @@ public class Backgammon {
           }
       }
     }
-
-    // Second Case 4 - 5 combined:
-    //dest = src - dice[1] - dice[2];
-    //if (!(board[dest] >= 2) && board[dest] >= 0) {
-        //move = src + "-" + dest;
-        //move += (board[dest] == 1) ? "x" : "";
-        //moves.add(move);
-    //}
-
-    //List<List<Integer>> diceOffsets = genMixed(dice);
-    //for (int i = 0; i < diceOffsets.size() - 1; i++) {
-      //List<Integer> offsets = diceOffsets.get(i);
-      //for (int j = 0; j < i; j++) {
-        ////int dest = src - offsets.get(j);
-        //int dest = src - offsets.get(j);
-        //String move = null;
-        //// Bearing off
-        //if (dest == 0) {
-          //move = src + "-" + dest;
-          //move += (board[dest] == 1) ? "x" : "";
-          //moves.add(move);
-        //} else if (dest < 0) {
-          //// Rule: If the roll will overshoot piece from home, but it is on the
-          //// farthest point away from home, it can bear off
-          //int furthestPoint = getFurthestFromHome(board);
-          //if (src == furthestPoint) {
-            //move = src + "-" + dest;
-            //move += (board[dest] == 1) ? "x" : "";
-            //moves.add(move);
-          //}
-          ////move = src + "-" + dest;
-        //}
-        //// Moving
-        //if (board[dest] >= 2) {
-          //break;
-        //} else {
-          //move = src + "-" + dest;
-          //move += (board[dest] == 1) ? "x" : "";
-          //moves.add(move);
-        //}
-        ////src = dest;
-        //}
-    //}
-    //moves = moves.stream()
-      //.distinct() // Filter duplicates
-      //.collect(Collectors.toList());
-
-    //// If we are given two choices: [25-22, 25-20]
-    //// We can only pick the highest choice.
-    ////if ((moves.size() > 1) && notDoubles(diceOffsets)) {
-    //if (moves.size() > 1) {
-      //// Since our sets are ordered properly, this will
-      //// remove the lower choice from our set for bar moves
-      //moves.remove(0);
-    //}
     return moves;
   }
 
