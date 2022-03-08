@@ -65,12 +65,15 @@ class BackgammonTests {
   }
 
 
-  //@Test
-  //public void canCalculateAllMoves() {
-    //int[] dice = {5, 3};
+  @Test
+  public void canCalculateAllMoves() {
+    int[] dice = {4, 3};
     //int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    //List<List<String>> result = Backgammon.calcAllMoves(board, dice);
-    //List<List<String>> expected = Arrays.asList("25-20");
-    //assertEquals(expected, result, "Should return only valid legal moves to be played.");
-  //}
+    int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
+    List<List<String>> result = Backgammon.calcAllMoves(board, dice);
+    List<List<String>> expected = Arrays.asList(
+        Arrays.asList("4-0,3-0"),
+        Arrays.asList("4-1,3-0"));
+    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+  }
 }

@@ -43,8 +43,22 @@ public class Backgammon {
     return ((firstOffset.get(0) != secondOffset.get(0)) ? true : false);
   }
 
-  //public static List<String> calcMove(int[] board, int src, int[] diceOffsets) {
-  //public static List<String> calcMove(int[] board, int src, List<List<Integer>> diceOffsets) {
+  // Gets the location of the furthest point away from home for the player
+  public static int getFurthestFromHome(int board[]) {
+    int[] home = new int [6];
+    for (int i = home.length; i > 0; i--) {
+      home[i] = board[board.length - i];
+    }
+    for (int i = 0; i < home.length; i++) {
+      if (i > 0) return board.length - i;
+    }
+    return 0;
+  }
+
+  //public static boolean canBearOff(int board[]) {
+    //return false;
+  //}
+
   public static List<String> calcMove(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
 
@@ -72,14 +86,34 @@ public class Backgammon {
     for (int i = 0; i < diceOffsets.size() - 1; i++) {
       List<Integer> offsets = diceOffsets.get(i);
       for (int j = 0; j < i; j++) {
+        //int dest = src - offsets.get(j);
         int dest = src - offsets.get(j);
         String move = null;
+        // Bearing off
+        if (dest == 0) {
+          move = src + "-" + dest;
+          move += (board[dest] == 1) ? "x" : "";
+          moves.add(move);
+        } else if (dest < 0) {
+          // Rule: If the roll will overshoot piece from home, but it is on the
+          // farthest point away from home, it can bear off
+          int furthestPoint = getFurthestFromHome(board);
+          if (src == furthestPoint) {
+            move = src + "-" + dest;
+            move += (board[dest] == 1) ? "x" : "";
+            moves.add(move);
+          }
+          //move = src + "-" + dest;
+        }
+        // Moving
         if (board[dest] >= 2) {
           break;
+        } else {
+          move = src + "-" + dest;
+          move += (board[dest] == 1) ? "x" : "";
+          moves.add(move);
         }
-        move = src + "-" + dest;
-        move += (board[dest] == 1) ? "x" : "";
-        moves.add(move);
+        //src = dest;
         }
     }
     moves = moves.stream()
@@ -88,10 +122,26 @@ public class Backgammon {
 
     // If we are given two choices: [25-22, 25-20]
     // We can only pick the highest choice.
-    if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+    //if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+    if (moves.size() > 1) {
       // Since our sets are ordered properly, this will
       // remove the lower choice from our set for bar moves
       moves.remove(0);
+    }
+    return moves;
+  }
+
+  public static List<List<String>> calcAllMoves(int[] board, int[] dice) {
+    List<List<String>> moves = new ArrayList<>();
+    // Note that if this doesn't work, split the loop in two to cover both the bar, and the points
+    for (int point = 25; point > 0; point--) {
+    //for (int point = 0; point < board.length; point++) {
+      // Hardcode calculation for player
+      int piecesAt = board[point];
+      if (piecesAt > 0) {
+        List<String> move = calcMove(board, point, dice);
+        moves.add(move);
+      }
     }
     return moves;
   }
