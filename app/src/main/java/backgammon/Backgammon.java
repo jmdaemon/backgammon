@@ -36,4 +36,55 @@ public class Backgammon {
         Arrays.asList(dice[1], dice[0]));
     return mixed;
   }
+
+  public static boolean notDoubles(List<List<Integer>> diceOffsets) {
+    List<Integer> firstOffset = diceOffsets.get(0);
+    List<Integer> secondOffset = diceOffsets.get(1);
+    return ((firstOffset.get(0) != secondOffset.get(0)) ? true : false);
+  }
+
+  //public static List<String> calcMove(int[] board, int src, int[] diceOffsets) {
+  public static List<String> calcMove(int[] board, int src, List<List<Integer>> diceOffsets) {
+    List<String> moves = new ArrayList<>();
+    for (int i = 0; i < diceOffsets.size() - 1; i++) {
+      List<Integer> offsets = diceOffsets.get(i);
+
+      for (int j = 0; j < i; j++) {
+        int dest = src - offsets.get(j);
+        if (board[dest] >= 2)
+          break;
+        String move = src + "-" + dest;
+        move += (board[dest] == 1) ? "x" : "";
+        moves.add(move);
+      }
+    }
+    moves = moves.stream()
+      .distinct() // Filter duplicates
+      .collect(Collectors.toList());
+
+    // If we are given two choices: [25-22, 25-20]
+    // We can only pick the highest choice.
+    if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+      // Since our sets are ordered properly, this will
+      // remove the lower choice from our set for bar moves
+      moves.remove(0);
+    }
+    return moves;
+    //for (int i : diceOffsets) {
+      ////int dest = i + src;
+      //int dest = src - i;
+      //String move = null;
+      //if (board[dest] >= 2) {
+        //break;
+      //}
+      //move = src + "-" + dest;
+      //move += (board[dest] == 1) ? "x" : "";
+      //moves.add(move);
+      ////else if (board[dest] == 1) {
+        ////move = src + "-" + dest + "x";
+      ////} else
+        ////move = src + "-" + dest;
+    //}
+    //return moves;
+  }
 }
