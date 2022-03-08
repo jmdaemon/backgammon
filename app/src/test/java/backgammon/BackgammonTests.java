@@ -63,19 +63,31 @@ class BackgammonTests {
         "25-20-15-10",
         "25-20-15-10-5");
     System.out.println(result);
-    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+    assertEquals(expected, result, "Should calculate all possible move combinations with doubles.");
   }
-
 
   @Test
-  public void canCalculateAllMoves() {
+  public void canCalculateBearOffMove() {
     int[] dice = {4, 3};
     //int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
+    int bearOffLocation = 4;
     int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
-    List<List<String>> result = Backgammon.calcAllMoves(board, dice);
-    List<List<String>> expected = Arrays.asList(
-        Arrays.asList("4-0,3-0"),
-        Arrays.asList("4-1,3-0"));
-    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+    //List<List<String>> result = Backgammon.calcAllMoves(board, dice);
+    List<String> result = Backgammon.calcBearOff(board, bearOffLocation, dice);
+    List<String> expected = Arrays.asList(("4-0"));
+    assertEquals(expected, result, "Should calculate a move to bear off");
   }
+
+
+  //@Test
+  //public void canCalculateAllMoves() {
+    //int[] dice = {4, 3};
+    ////int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
+    //int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
+    //List<List<String>> result = Backgammon.calcAllMoves(board, dice);
+    //List<List<String>> expected = Arrays.asList(
+        //Arrays.asList("4-0,3-0"),
+        //Arrays.asList("4-1,3-0"));
+    //assertEquals(expected, result, "Should return only valid legal moves to be played.");
+  //}
 }

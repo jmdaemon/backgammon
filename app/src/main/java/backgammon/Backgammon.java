@@ -55,9 +55,16 @@ public class Backgammon {
     return 0;
   }
 
-  //public static boolean canBearOff(int board[]) {
-    //return false;
-  //}
+  public static boolean canBearOff(int board[]) {
+    for (int i = 0; i < board.length; i++) {
+      //int startOfHome = i % 18;
+      if (i > 0)
+        return false;
+      if (i == 18) // Start of home
+        return true;
+    }
+    return false;
+  }
 
   public static List<String> calcDouble(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
@@ -130,6 +137,39 @@ public class Backgammon {
     return moves;
   }
 
+  public static List<String> calcBearOff(int[] board, int src, int[] dice) {
+    List<String> moves = new ArrayList<>();
+    //int dest = src + dice[0];
+    int dest = src - dice[0];
+    //int bearOffAt = -1;
+    int bearOffAt = 0;
+    String move;
+    if (dest == bearOffAt) {
+      move = src + "-" + dest;
+      move += (board[dest] == 1) ? "x" : "";
+      moves.add(move);
+
+      //src = dest;
+      // Check other roll
+      //dest = src + dice[1];
+      //if (!(board[dest] >= 2) && board[dest] >= 0) {
+          ////move = src + "-" + dest;
+          //move = move + "-" + dest;
+          //move += (board[dest] == 1) ? "x" : "";
+          //moves.add(move);
+      //}
+    } else if (dest < bearOffAt) {
+        int furthestPoint = getFurthestFromHome(board);
+        if (src == furthestPoint) {
+          move = src + "-" + dest;
+          move += (board[dest] == 1) ? "x" : "";
+          moves.add(move);
+        }
+    }
+
+    return moves;
+  }
+
   public static List<String> calcMove(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
 
@@ -194,12 +234,21 @@ public class Backgammon {
       int piecesAt = board[point];
       // Assume we're calculating the moves for the user player
       if (piecesAt > 0) {
-        // Doubles
         List<String> move = new ArrayList<>();
+
+        // Bearing Off
+        if (canBearOff(board)) {
+          move = Backgammon.calcBearOff(board, point, dice);
+          moves.add(move);
+        }
+
+        // Doubles
         if (dice[0] == dice[1]) {
           move = Backgammon.calcDouble(board, point, dice);
+          moves.add(move);
         }
         //move = calcMove(board, point, dice);
+        // Mixed
         move = calcMixed(board, point, dice);
         moves.add(move);
       }
