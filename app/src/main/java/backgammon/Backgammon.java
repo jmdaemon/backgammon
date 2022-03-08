@@ -79,6 +79,112 @@ public class Backgammon {
     return moves;
   }
 
+  public static List<String> calcMixed(int[] board, int src, int[] dice) {
+    List<String> moves = new ArrayList<>();
+    // First case: 5
+    //int dest = src - dice[0];
+    int dest = src + dice[0];
+    String move = null;
+    //if (!(board[dest] >= 2) && board[dest] >= 0) {
+    if (dest < board.length - 1) {
+      if (!(board[dest] >= 2) && board[dest] >= 0) {
+          move = src + "-" + dest;
+          move += (board[dest] == 1) ? "x" : "";
+          moves.add(move);
+          src = dest; // Update src
+          // Check combined
+          // Second case: 4
+          //dest = src - dice[1];
+          dest = src + dice[1];
+          if (!(board[dest] >= 2) && board[dest] >= 0) {
+              //move = src + "-" + dest;
+              move = move + "-" + dest;
+              move += (board[dest] == 1) ? "x" : "";
+              moves.add(move);
+          }
+
+      }
+    }
+
+    // Second Case 4:
+    //dest = src - dice[1];
+    if (dest < board.length - 1) {
+      dest = src + dice[1];
+      if ((dest < board.length) && !(board[dest] >= 2) && board[dest] >= 0) {
+          move = src + "-" + dest;
+          move += (board[dest] == 1) ? "x" : "";
+          moves.add(move);
+          src = dest; // Update src
+          // Check combined
+          // case: 5
+          //dest = src - dice[0];
+          dest = src + dice[0];
+          if (!(board[dest] >= 2) && board[dest] >= 0) {
+              //move = src + "-" + dest;
+              move = move + "-" + dest;
+              move += (board[dest] == 1) ? "x" : "";
+              moves.add(move);
+          }
+      }
+    }
+
+    // Second Case 4 - 5 combined:
+    //dest = src - dice[1] - dice[2];
+    //if (!(board[dest] >= 2) && board[dest] >= 0) {
+        //move = src + "-" + dest;
+        //move += (board[dest] == 1) ? "x" : "";
+        //moves.add(move);
+    //}
+
+    //List<List<Integer>> diceOffsets = genMixed(dice);
+    //for (int i = 0; i < diceOffsets.size() - 1; i++) {
+      //List<Integer> offsets = diceOffsets.get(i);
+      //for (int j = 0; j < i; j++) {
+        ////int dest = src - offsets.get(j);
+        //int dest = src - offsets.get(j);
+        //String move = null;
+        //// Bearing off
+        //if (dest == 0) {
+          //move = src + "-" + dest;
+          //move += (board[dest] == 1) ? "x" : "";
+          //moves.add(move);
+        //} else if (dest < 0) {
+          //// Rule: If the roll will overshoot piece from home, but it is on the
+          //// farthest point away from home, it can bear off
+          //int furthestPoint = getFurthestFromHome(board);
+          //if (src == furthestPoint) {
+            //move = src + "-" + dest;
+            //move += (board[dest] == 1) ? "x" : "";
+            //moves.add(move);
+          //}
+          ////move = src + "-" + dest;
+        //}
+        //// Moving
+        //if (board[dest] >= 2) {
+          //break;
+        //} else {
+          //move = src + "-" + dest;
+          //move += (board[dest] == 1) ? "x" : "";
+          //moves.add(move);
+        //}
+        ////src = dest;
+        //}
+    //}
+    //moves = moves.stream()
+      //.distinct() // Filter duplicates
+      //.collect(Collectors.toList());
+
+    //// If we are given two choices: [25-22, 25-20]
+    //// We can only pick the highest choice.
+    ////if ((moves.size() > 1) && notDoubles(diceOffsets)) {
+    //if (moves.size() > 1) {
+      //// Since our sets are ordered properly, this will
+      //// remove the lower choice from our set for bar moves
+      //moves.remove(0);
+    //}
+    return moves;
+  }
+
   public static List<String> calcMove(int[] board, int src, int[] dice) {
     List<String> moves = new ArrayList<>();
 
@@ -132,11 +238,14 @@ public class Backgammon {
     return moves;
   }
 
+  // Array are stored:
+  // index 0, 1, 2, 3 .. 25
+  // 0: Leftmost, 25: Rightmost
   public static List<List<String>> calcAllMoves(int[] board, int[] dice) {
     List<List<String>> moves = new ArrayList<>();
     // Note that if this doesn't work, split the loop in two to cover both the bar, and the points
-    for (int point = 25; point > 0; point--) {
-    //for (int point = 0; point < board.length; point++) {
+    //for (int point = 25; point > 0; point--) {
+    for (int point = 0; point < board.length; point++) {
       int piecesAt = board[point];
       // Assume we're calculating the moves for the user player
       if (piecesAt > 0) {
@@ -145,7 +254,8 @@ public class Backgammon {
         if (dice[0] == dice[1]) {
           move = Backgammon.calcDouble(board, point, dice);
         }
-        move = calcMove(board, point, dice);
+        //move = calcMove(board, point, dice);
+        move = calcMixed(board, point, dice);
         moves.add(move);
       }
     }

@@ -45,6 +45,7 @@ class BackgammonTests {
     int[] dice = {5, 3};
     int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
     List<String> result = Backgammon.calcMove(board, barLocation, dice);
+    //List<String> result = Backgammon.calcMixed(board, barLocation, dice);
     List<String> expected = Arrays.asList("25-20");
     System.out.println(result);
     assertEquals(expected, result, "Should return only valid legal moves to be played.");
