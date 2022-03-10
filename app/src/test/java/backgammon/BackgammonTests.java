@@ -54,10 +54,9 @@ class BackgammonTests {
   @Test
   public void canCalculateBarMove() {
     int[] dice = {5, 3};
-    int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    //List<String> result = Backgammon.calcMove(board, barLocation, dice);
+    int[] board = {0,1, 0,0,0,0,0,0,   0,0,0,0,0,0,  0,0,-2,0,-2,0, 0,0,0,0,0,0};
     List<String> result = Backgammon.calcBarMove(board, barLocation, dice);
-    List<String> expected = Arrays.asList("25-20");
+    List<String> expected = Arrays.asList("25-20-17");
     checkResult(expected, result, "Should return only valid legal moves to be played.");
   }
 

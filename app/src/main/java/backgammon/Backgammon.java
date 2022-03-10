@@ -155,20 +155,43 @@ public class Backgammon {
       String move = null;
       if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
         // Add the move
+        //String tempMove = src + "-" + dest;
+        //tempMove += (board[boardDest] == -1) ? "x" : ""; // If there is a blot
         move = src + "-" + dest;
         move += (board[boardDest] == -1) ? "x" : ""; // If there is a blot
-        moves.add(move);
+
+        // Now check for the combined play
+        src = dest; // Assume we have made the play and are now at the dest.
+        boardDest = board.length - src;
+        dice = swap(dice, 0, 1); // Swap 4 with 2
+        dest = src - dice[0];
+
+        if (!(board[boardDest] <= -2) && board[boardDest] >= 0) {
+          //moves.add(move);
+          move = move + "-" + dest;
+          move += (board[boardDest] == -1) ? "x" : "";
+          moves.add(move);
+        }
+
+        dice = swap(dice, 0, 1); // Swap 4 with 2
       }
     }
 
-    if (dice[0] > dice[1]) {
-      // Return the higher roll
-      moves.remove(1);
-    } else if (dice[1] > dice[0]) {
-      moves.remove(0);
-    } else if (dice.length == 2) {
-      // Doubles
-      moves.remove(0);
+    // Rule:
+    // Let the dice roll be 5, 3
+    // If you are given two choices between moving 5 up or 4 up but not both,
+    // You must only play the higher roll
+    // This rule applies only to moving pieces from the bar to the board
+    if (moves.size() > 1) {
+      if (dice[0] > dice[1]) {
+        // Return the higher roll
+        moves.remove(1);
+      } else if (dice[1] > dice[0]) {
+        moves.remove(0);
+      } else if (dice.length == 2) {
+        // Doubles
+        moves.remove(0);
+      }
     }
     return moves;
   }
