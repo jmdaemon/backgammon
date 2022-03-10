@@ -13,6 +13,12 @@ class BackgammonTests {
     barLocation = 25; // Our player's piece is on the bar which is defined as being from 26-25
   }
 
+  // Displays the result and also checks the result
+  public void checkResult(List<String> expected, List<String> result, String message) {
+    System.out.println(result);
+    assertEquals(expected, result, message);
+  }
+
   @Test
   public void canCalculateMoveMixed() {
     int[] dice = {4, 2};
@@ -20,8 +26,7 @@ class BackgammonTests {
     int pieceLocation = 11;
     List<String> result = Backgammon.calcMixed(board, pieceLocation, dice);
     List<String> expected = Arrays.asList("11-7", "11-7-5", "11-9", "11-9-5");
-    System.out.println(result);
-    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+    checkResult(expected, result, "Should return only valid legal moves to be played.");
   }
 
   @Test
@@ -34,8 +39,7 @@ class BackgammonTests {
         "25-20-15",
         "25-20-15-10",
         "25-20-15-10-5");
-    System.out.println(result);
-    assertEquals(expected, result, "Should calculate all possible move combinations with doubles.");
+    checkResult(expected, result, "Should calculate all possible move combinations with doubles.");
   }
 
   @Test
@@ -44,8 +48,7 @@ class BackgammonTests {
     int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
     List<String> result = Backgammon.calcBearOff(board, dice);
     List<String> expected = Arrays.asList("4-0", "3-0");
-    System.out.println(result);
-    assertEquals(expected, result, "Should calculate a move to bear off");
+    checkResult(expected, result, "Should calculate a move to bear off");
   }
 
   @Test
@@ -55,8 +58,7 @@ class BackgammonTests {
     //List<String> result = Backgammon.calcMove(board, barLocation, dice);
     List<String> result = Backgammon.calcBarMove(board, barLocation, dice);
     List<String> expected = Arrays.asList("25-20");
-    System.out.println(result);
-    assertEquals(expected, result, "Should return only valid legal moves to be played.");
+    checkResult(expected, result, "Should return only valid legal moves to be played.");
   }
 
 
