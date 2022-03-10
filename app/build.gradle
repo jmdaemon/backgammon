@@ -71,7 +71,7 @@ javadoc {
 sourceSets {
     main {
         java {
-          exclude 'ui/**'
+          exclude 'ui/javafx'
           exclude 'launch/**'
         }
     }
