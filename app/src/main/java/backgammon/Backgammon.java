@@ -43,7 +43,7 @@ public class Backgammon {
 
   public static boolean canBearOff(int board[]) {
     for (int i = 0; i < board.length; i++) {
-      if (i > 0)
+      if (board[i] > 0)
         return false;
       if (i == 18) // Start of home
         return true;
