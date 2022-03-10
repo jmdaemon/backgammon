@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Backgammon {
   // The game board is laid out according to the following:
-  // Bar1   Bar2    Points [6,      6,      6,    6]    BearOffPoint
+  // Bar2   Bar1    Points [6,      6,      6,    6]    BearOffPoint
   // 26     25              24-18   18-12   12-6  6-1   0
 
   // Arrays are stored from zero-index:
@@ -16,6 +16,13 @@ public class Backgammon {
   // *Note* that these are the inverse of each other
   // *Note* that the highest array index is one less than the
   // total number of points (26 including both Bar and born off point).
+
+  // Assume:
+  // - The player's bar is Bar1
+  // - The computer opponent's bar is Bar2
+
+  final static int OPPONENT_BAR = 0;
+  final static int PLAYER_BAR = 1;
 
   // Gets the location of the furthest point away from home for the player
   public static int getFurthestFromHome(int board[]) {
@@ -28,6 +35,10 @@ public class Backgammon {
         return board.length - i;
     }
     return 0;
+  }
+
+  public static boolean isOnBar(int board[]) {
+    return (board[PLAYER_BAR] > 0) ? true : false;
   }
 
   public static boolean canBearOff(int board[]) {
@@ -173,6 +184,12 @@ public class Backgammon {
       if (piecesAt > 0) {
         // Prompt for a new move
         List<String> move = new ArrayList<>();
+
+
+        if (isOnBar(board)) {
+          move = calcBarMove(board, point, dice);
+          moves.add(move);
+        }
 
         // Bearing Off
         if (canBearOff(board)) {
