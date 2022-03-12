@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTests {
   int barLocation;
+  Board board;
 
   @BeforeEach
   public void setUp() {
@@ -22,9 +23,9 @@ class BoardTests {
   @Test
   public void canCalculateMoveMixed() {
     int[] dice = {4, 2};
-    int[] board = {0,0, 0,0,-2,-2,0,0,  0,0,0,0,0,0,  0,1,1,0,0,0,   0,0,0,0,0,0};
+    board = new Board(new int [] {0,0, 0,0,-2,-2,0,0,  0,0,0,0,0,0,  0,1,1,0,0,0,   0,0,0,0,0,0});
     int pieceLocation = 11;
-    List<String> result = Board.calcMixed(board, pieceLocation, dice);
+    List<String> result = board.calcMixed(pieceLocation, dice);
     List<String> expected = Arrays.asList("11-7", "11-7-5", "11-9", "11-9-5");
     checkResult(expected, result, "Should return only valid legal moves to be played.");
   }
@@ -32,8 +33,8 @@ class BoardTests {
   @Test
   public void canCalculateMoveDoubles() {
     int[] dice = {5, 5};
-    int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    List<String> result = Board.calcDouble(board, barLocation, dice);
+    board = new Board(new int [] {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0});
+    List<String> result = board.calcDouble(barLocation, dice);
     List<String> expected = Arrays.asList(
         "25-20",
         "25-20-15",
@@ -45,8 +46,8 @@ class BoardTests {
   @Test
   public void canCalculateBearOffMove() {
     int[] dice = {4, 3};
-    int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
-    List<String> result = Board.calcBearOff(board, dice);
+    board = new Board(new int[] {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1});
+    List<String> result = board.calcBearOff(dice);
     List<String> expected = Arrays.asList("4-0", "3-0");
     checkResult(expected, result, "Should calculate a move to bear off");
   }
@@ -54,8 +55,8 @@ class BoardTests {
   @Test
   public void canCalculateBarMove() {
     int[] dice = {5, 3};
-    int[] board = {0,1, 0,0,0,0,0,0,   0,0,0,0,0,0,  0,0,-2,0,-2,0, 0,0,0,0,0,0};
-    List<String> result = Board.calcBarMove(board, barLocation, dice);
+    board = new Board(new int[] {0,1, 0,0,0,0,0,0,   0,0,0,0,0,0,  0,0,-2,0,-2,0, 0,0,0,0,0,0});
+    List<String> result = board.calcBarMove(barLocation, dice);
     List<String> expected = Arrays.asList("25-20-17");
     checkResult(expected, result, "Should return only valid legal moves to be played.");
   }
@@ -66,7 +67,7 @@ class BoardTests {
     //int[] dice = {4, 3};
     ////int[] board = {0,1, 0,0,0,0,0,0,    0,-3,0,0,0,5, 0,0,-2,0,-2,0, 0,0,0,0,0,0};
     //int[] board = {-1,0, 0,0,0,0,0,0,    0,0,0,0,0,0,  0,0,0,0,0,0,   0,0,1,1,0,1};
-    //List<List<String>> result = Board.calcAllMoves(board, dice);
+    //List<List<String>> result = board.calcAllMoves(board, dice);
     //List<List<String>> expected = Arrays.asList(
         //Arrays.asList("4-0,3-0"),
         //Arrays.asList("4-1,3-0"));

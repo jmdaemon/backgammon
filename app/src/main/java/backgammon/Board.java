@@ -23,9 +23,35 @@ public class Board {
 
   final static int OPPONENT_BAR = 0;
   final static int PLAYER_BAR = 1;
+  private int board[];
+
+  // Set a game to a specific board setup
+  public Board(int board[]) {
+    setBoard(board);
+  }
+
+  // Default board setup
+  public Board() {
+    int[] setup = {
+      0, 0,
+      2, 0, 0, 0, 0, 5,
+      0, 3, 0, 0, 0, 5,
+      5, 0, 0, 0, 3, 0,
+      5, 0, 0, 0, 0, 2,
+    };
+    setBoard(setup);
+  }
+
+  public void setBoard(int board[]) {
+    this.board = board;
+  }
+
+  public int[] getBoard(int board[]) {
+    return this.board;
+  }
 
   // Gets the location of the furthest point away from home for the player
-  public static int getFurthestFromHome(int board[]) {
+  public int getFurthestFromHome() {
     int[] home = new int[6];
     for (int i = home.length - 1; i > 0; i--) {
       home[i] = board[board.length - i];
@@ -37,11 +63,11 @@ public class Board {
     return 0;
   }
 
-  public static boolean isOnBar(int board[]) {
+  public boolean isOnBar() {
     return (board[PLAYER_BAR] > 0) ? true : false;
   }
 
-  public static boolean canBearOff(int board[]) {
+  public boolean canBearOff() {
     for (int i = 0; i < board.length; i++) {
       if (board[i] > 0)
         return false;
@@ -51,7 +77,7 @@ public class Board {
     return false;
   }
 
-  public static List<String> calcDouble(int[] board, int src, int[] dice) {
+  public List<String> calcDouble(int src, int[] dice) {
     List<String> moves = new ArrayList<>();
     int die = dice[0];
     String move = null;
@@ -79,7 +105,7 @@ public class Board {
     return pair;
   }
 
-  public static List<String> calcMixed(int[] board, int src, int[] dice) {
+  public List<String> calcMixed(int src, int[] dice) {
     // Assume we start with dice: 4, 2
     List<String> moves = new ArrayList<>();
     int temp = src;
@@ -114,7 +140,7 @@ public class Board {
     return moves;
   }
 
-  public static List<String> calcBearOff(int[] board, int[] dice) {
+  public List<String> calcBearOff(int[] dice) {
     List<String> moves = new ArrayList<>();
     final int bearOffAt = 0;
     final int homeStart = 19;
@@ -134,7 +160,7 @@ public class Board {
         } else if (dest < bearOffAt) {
           // Rule: If the roll will overshoot piece from home, but it is on the
           // farthest point away from home, it can bear off
-          int furthestPoint = getFurthestFromHome(board);
+          int furthestPoint = getFurthestFromHome();
           if (src == furthestPoint) {
             move = src + "-" + dest;
             move += (board[dest] == 1) ? "x" : "";
@@ -146,7 +172,7 @@ public class Board {
     return moves;
   }
 
-  public static List<String> calcBarMove(int[] board, int src, int[] dice) {
+  public List<String> calcBarMove(int src, int[] dice) {
     List<String> moves = new ArrayList<>();
     //int temp = src;
     for (int i = 0; i < dice.length; i++) {
@@ -196,7 +222,7 @@ public class Board {
     return moves;
   }
 
-  public static List<List<String>> calcAllMoves(int[] board, int[] dice) {
+  public List<List<String>> calcAllMoves(int[] dice) {
     List<List<String>> moves = new ArrayList<>();
     // Note that if this doesn't work, split the loop in two to cover both the bar,
     // and the points
@@ -208,26 +234,25 @@ public class Board {
         // Prompt for a new move
         List<String> move = new ArrayList<>();
 
-
-        if (isOnBar(board)) {
-          move = calcBarMove(board, point, dice);
+        if (isOnBar()) {
+          move = calcBarMove(point, dice);
           moves.add(move);
         }
 
         // Bearing Off
-        if (canBearOff(board)) {
+        if (canBearOff()) {
           // move = Backgammon.calcBearOff(board, point, dice);
-          move = calcBearOff(board, dice);
+          move = calcBearOff(dice);
           moves.add(move);
         }
 
         // Doubles
         if (dice[0] == dice[1]) {
-          move = calcDouble(board, point, dice);
+          move = calcDouble(point, dice);
           moves.add(move);
         }
         // Mixed
-        move = calcMixed(board, point, dice);
+        move = calcMixed(point, dice);
         moves.add(move);
       }
     }
