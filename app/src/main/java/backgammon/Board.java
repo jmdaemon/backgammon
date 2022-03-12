@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.util.Arrays;
 import java.util.List;
 
-public class Backgammon {
+public class Board {
   // The game board is laid out according to the following:
   // Bar2   Bar1    Points [6,      6,      6,    6]    BearOffPoint
   // 26     25              24-18   18-12   12-6  6-1   0
@@ -217,13 +217,13 @@ public class Backgammon {
         // Bearing Off
         if (canBearOff(board)) {
           // move = Backgammon.calcBearOff(board, point, dice);
-          move = Backgammon.calcBearOff(board, dice);
+          move = calcBearOff(board, dice);
           moves.add(move);
         }
 
         // Doubles
         if (dice[0] == dice[1]) {
-          move = Backgammon.calcDouble(board, point, dice);
+          move = calcDouble(board, point, dice);
           moves.add(move);
         }
         // Mixed
