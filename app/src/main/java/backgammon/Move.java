@@ -10,20 +10,25 @@ public class Move {
   private final List<Movelet> movelets = new ArrayList<>();
 
 
-  public Move(int from, int to, List<Integer> dice, boolean isDoubles) {
+  public Move(int from, int to, int dir, List<Integer> dice, boolean isDoubles) {
     this.from = from;
+
+    to = Math.min(to, 25);
+    if (to < 0)
+      to = 0;
+
     this.to = to;
 
     int die = dice.get(0);
 
     for (int i = 0; i < dice.size() && isDoubles; i++) {
-      movelets.add(new Movelet(from - die * i, from - die * (i + 1), die ));
+      movelets.add(new Movelet(from + dir * die * i, from + dir * die * (i + 1), die ));
     }
 
     if (!isDoubles) {
-      movelets.add(new Movelet(from, from - die, die ));
+      movelets.add(new Movelet(from, from + dir * die, die ));
       if (dice.size() == 2)
-        movelets.add(new Movelet(from - die, from - die - dice.get(1), dice.get(1)));
+        movelets.add(new Movelet(from + dir * die, from + dir * (die + dice.get(1)), dice.get(1)));
     }
   }
 

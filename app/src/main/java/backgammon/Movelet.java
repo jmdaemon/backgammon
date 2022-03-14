@@ -18,16 +18,6 @@ public record Movelet(int from, int to, int die) {
 
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    Movelet movelet = (Movelet) o;
-    return from == movelet.from() && to == movelet.to();
-  }
-
-
-
-  @Override
   public String toString() {
     return "-" + to;
   }
