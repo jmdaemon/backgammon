@@ -3,13 +3,11 @@ package backgammon;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Move {
 
   private final int from;
   private final int to;
   private final List<Movelet> movelets = new ArrayList<>();
-
 
   public Move(int from, int to, int dir, List<Integer> dice, boolean isDoubles) {
     this.from = from;
@@ -41,17 +39,13 @@ public class Move {
     return dice;
   }
 
-
   public List<Movelet> getMovelets() {
     return movelets;
   }
 
-
   public int getNumOfMovelets() {
     return movelets.size();
   }
-
-
 
   //This and the one in movelet are just there to see which moves are being found
   @Override
@@ -63,7 +57,4 @@ public class Move {
 
     return moveString;
   }
-
-
 }
-

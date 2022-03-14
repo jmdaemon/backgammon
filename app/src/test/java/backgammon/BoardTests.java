@@ -62,7 +62,6 @@ class BoardTests {
     checkResult(expected, result, "Should return only valid legal moves to be played.");
   }
 
-
   @Test
   public void canConstructMoveletsForNonDoubles() {
     List<Integer> dice = new ArrayList<>(Arrays.asList(3, 5));
@@ -73,7 +72,6 @@ class BoardTests {
     expected.add(new Movelet(5, 10, 5));
     //You'll need to add your checkResult thing
   }
-
 
   @Test
   public void canConstructMoveletsForDoubles() {
@@ -87,7 +85,6 @@ class BoardTests {
     expected.add(new Movelet(8, 10, 2));
     //You'll need to add your checkResult thing x2
   }
-
 
   //@Test
   //public void canCalculateAllMoves() {
