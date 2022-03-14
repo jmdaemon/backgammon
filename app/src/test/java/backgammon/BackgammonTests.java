@@ -84,7 +84,7 @@ class BackgammonTests {
     expected.add(new Movelet(4, 6, 2));
     expected.add(new Movelet(6, 8, 2));
     expected.add(new Movelet(8, 10, 2));
-    //You'll need to add your checkResult thing
+    //You'll need to add your checkResult thing x2
   }
 
 

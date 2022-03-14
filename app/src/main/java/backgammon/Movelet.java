@@ -2,6 +2,7 @@ package backgammon;
 
 public record Movelet(int from, int to, int die) {
 
+
   public int from() {
     return from;
   }

@@ -3,6 +3,7 @@ package backgammon;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Move {
 
   private final int from;
