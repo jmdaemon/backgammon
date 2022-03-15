@@ -3,6 +3,7 @@ package backgammon;
 import java.util.List;
 import java.awt.*;
 
+
 public class Player {
   private int color;
   private String name;
@@ -86,7 +87,7 @@ public class Player {
   }
 
 
-  public void bornOff() {
+  public void bearOff() {
     outCount++;
   }
 
