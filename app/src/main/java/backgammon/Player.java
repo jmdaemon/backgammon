@@ -8,21 +8,35 @@ public class Player {
   private Color color;
   private List<String> moveList;
 
+  private int direction;
+  private int outPoint;
+  private int barPoint;
+  private int outCount;
+
   /**
    * @param color Color of the player's pieces
    * @param name Player's name
    * @param moveList The possible moves available for the player
    */
-  public Player(Color color, String name, List<String> moveList) {
-    this.color = color;
+
+  public Player (String name, Color color, List<String> moveList, int direction, int outPoint, int bar) {
     this.name = name;
-    this.moveList = moveList;
+    this.color = color;
+    this.direction = direction;
+    this.outPoint = outPoint;
+    this.barPoint = bar;
+    this.outCount = 0;
   }
 
   public Player() {
     color = null;
     name = null;
     moveList = null;
+
+    direction = 0;
+    outPoint = 0;
+    barPoint = 0;
+    outCount = 0;
   }
 
   // Getters
@@ -67,22 +81,6 @@ public class Player {
     }
     return board;
   }
-
-  private final int direction;
-  private final int outPoint;
-  private final int barPoint;
-  private int outCount;
-
-
-  public Player(String name, Color color, int direction, int outPoint, int bar) {
-    this.name = name;
-    this.color = color;
-    this.direction = direction;
-    this.outPoint = outPoint;
-    this.barPoint = bar;
-    this.outCount = 0;
-  }
-
 
   public void bearOff() {
     outCount++;
