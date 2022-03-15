@@ -10,7 +10,6 @@ public class Player {
 
   private int direction;
   private int outPoint;
-  private int barPoint;
   private int outCount;
 
   /**
@@ -19,12 +18,11 @@ public class Player {
    * @param moveList The possible moves available for the player
    */
 
-  public Player (String name, Color color, List<String> moveList, int direction, int outPoint, int bar) {
+  public Player (String name, Color color, List<String> moveList, int direction, int outPoint) {
     this.name = name;
     this.color = color;
     this.direction = direction;
     this.outPoint = outPoint;
-    this.barPoint = bar;
     this.outCount = 0;
   }
 
@@ -35,7 +33,6 @@ public class Player {
 
     direction = 0;
     outPoint = 0;
-    barPoint = 0;
     outCount = 0;
   }
 
@@ -94,12 +91,6 @@ public class Player {
   public int getOutPoint() {
     return outPoint;
   }
-
-
-  public int getBarPoint() {
-    return barPoint;
-  }
-
 
   public int getOutCount() {
     return outCount;
