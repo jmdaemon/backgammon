@@ -19,21 +19,27 @@ public class Move {
 
     this.to = to;
     int die = dice.get(0);
+    int src = from;
 
     // Enumerate all the possible move combinations for doubles
     if (isDoubles) {
       for (int i = 0; i < dice.size(); i++) {
-        int src = from + dir * die * i;
         int dest = from + dir * die * (i + 1);
         movelets.add(new Movelet(src, dest, die));
+        src = dest;
       }
     }
 
     // Enumerate all the possible move combinations for mixed
     if (!isDoubles) {
-      movelets.add(new Movelet(from, from + dir * die, die ));
-      if (dice.size() == 2)
-        movelets.add(new Movelet(from + dir * die, from + dir * (die + dice.get(1)), dice.get(1)));
+      int dest = from + dir * die;
+      movelets.add(new Movelet(src, dest, die));
+      if (dice.size() == 2) {
+        int nextDie = dice.get(1);
+        src = from + dir * die;
+        dest = from + dir * (die + nextDie);
+        movelets.add(new Movelet(src, dest, nextDie));
+      }
     }
   }
 
