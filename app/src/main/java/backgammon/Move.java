@@ -7,7 +7,8 @@ public class Move {
 
   private final int from;
   private final int to;
-  private final List<Movelet> movelets = new ArrayList<>();
+
+  private List<Movelet> movelets = new ArrayList<>();
 
   public Move(int from, int to, int dir, List<Integer> dice, boolean isDoubles) {
     this.from = from;
@@ -17,20 +18,24 @@ public class Move {
       to = 0;
 
     this.to = to;
-
     int die = dice.get(0);
 
-    for (int i = 0; i < dice.size() && isDoubles; i++) {
-      movelets.add(new Movelet(from + dir * die * i, from + dir * die * (i + 1), die ));
+    // Enumerate all the possible move combinations for doubles
+    if (isDoubles) {
+      for (int i = 0; i < dice.size(); i++) {
+        int src = from + dir * die * i;
+        int dest = from + dir * die * (i + 1);
+        movelets.add(new Movelet(src, dest, die));
+      }
     }
 
+    // Enumerate all the possible move combinations for mixed
     if (!isDoubles) {
       movelets.add(new Movelet(from, from + dir * die, die ));
       if (dice.size() == 2)
         movelets.add(new Movelet(from + dir * die, from + dir * (die + dice.get(1)), dice.get(1)));
     }
   }
-
 
   //Will need this to remove the dice from the list of dice in the game loop
   public List<Integer> getDice(List<Integer> dice) {
