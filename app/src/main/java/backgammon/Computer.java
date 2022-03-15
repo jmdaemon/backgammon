@@ -4,16 +4,6 @@ import java.util.Random;
 
 public class Computer extends Player{
 
-  //Selects chip from moveList given
-  public int selectChip(int[] board, List<String> moveList) {
-    //getting number that the move starts at so we can select the chip at this place
-    char charChip = (this.selectMove(board,  moveList)).charAt(0);
-    int chip = Character.getNumericValue(charChip);
-
-    //returns the index of the selected chips placement on the board
-    return (board.length - chip);
-  }
-
   public String selectMove(int[] board, List<String> moveList) {
     Random rnd = new Random();
     int choice = rnd.nextInt(moveList.size());
