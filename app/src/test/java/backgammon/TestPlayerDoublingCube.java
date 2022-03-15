@@ -8,4 +8,5 @@ public class TestPlayerDoublingCube {
   }
 
   public boolean getCubeOwnership(){return this.cubeOwnership;}
+  public void setCubeOwnership(boolean x){this.cubeOwnership = x;}
 }
