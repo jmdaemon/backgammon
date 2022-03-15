@@ -1,38 +1,46 @@
 package backgammon;
 
 import java.util.List;
+import java.awt.Color;
 
 public class Player {
-  private int color;
   private String name;
+  private Color color;
   private List<String> moveList;
+
+  private int direction;
 
   /**
    * @param color Color of the player's pieces
    * @param name Player's name
    * @param moveList The possible moves available for the player
+   * @param direction The direction the player is going in around the board
    */
-  public Player(int color, String name, List<String> moveList) {
-    this.color = color;
+
+  public Player (String name, Color color, List<String> moveList, int direction) {
     this.name = name;
-    this.moveList = moveList;
+    this.color = color;
+    this.direction = direction;
   }
 
   public Player() {
-    color = 0;
+    color = null;
     name = null;
     moveList = null;
+
+    direction = 0;
   }
 
   // Getters
-  public List<String> getMoveList(){return moveList;}
-  public int getColor() {return color;}
-  public String getName() {return name;}
-  public String getMove(int index){ return moveList.get(index); }
+  public List<String> getMoveList() { return moveList; }
+  public String getName()           { return name; }
+  public Color getColor()           { return color; }
+  public int getDirection()         { return direction; }
+  public String getMove(int index)  { return moveList.get(index); }
 
   // Setters
   public void setMoveList(List<String> moveList){this.moveList = moveList;}
-  public void setColor(int color) {this.color = color;}
+  public void setColor(Color color) {this.color = color;}
   public void setName(String name) {this.name = name;}
 
   /**
@@ -67,4 +75,3 @@ public class Player {
     return board;
   }
 }
-
