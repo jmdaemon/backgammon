@@ -24,7 +24,7 @@ public class Move {
     // Enumerate all the possible move combinations for doubles
     if (isDoubles) {
       for (int i = 0; i < dice.size(); i++) {
-        int dest = from + dir * die * (i + 1);
+        int dest = src + dir * die;
         movelets.add(new Movelet(src, dest, die));
         src = dest;
       }
