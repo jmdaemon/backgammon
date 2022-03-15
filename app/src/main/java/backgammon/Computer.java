@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Computer extends Player{
 
-  public String selectMove(int[] board, List<String> moveList) {
+  public String selectMove(List<String> moveList) {
     Random rnd = new Random();
     int choice = rnd.nextInt(moveList.size());
     return moveList.get(choice);
@@ -13,7 +13,7 @@ public class Computer extends Player{
   //Finalizes move to be played and updates the board
   public int[] playMove(int[] board, List<String> moveList) {
     //Splits String from random moveChoice into an array of landing points
-    String move = this.selectMove(board, moveList);
+    String move = this.selectMove(moveList);
     String [] points = move.split("-");
 
     //Number that the chip moves from
