@@ -44,13 +44,14 @@ public class Player {
   public String getMove(int index){ return moveList.get(index); }
 
   /**
-   *
+   * Obtains the index of the selected move from the player
+   * This will be a callback function that the GUI uses to
+   * determine the current move selected in the movesList.
    * @return
    */
   public int selectMove() {
     return 0;
   }
-
 
   /**
    *  Finalizes move to be played and updates the board
