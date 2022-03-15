@@ -7,35 +7,52 @@ public class Player {
   // Black == 1; White == 2
   private int color;
   private String name;
+  private List<String> moveList;
 
   public Player() {
     color = 0;
     name = null;
+    moveList = null;
   }
 
-  public Player(int color, String name) {
+  public Player(int color, String name, List<String> moveList) {
     this.color = color;
     this.name = name;
+    this.moveList = moveList;
   }
 
-  public int getColor() {
-    return color;
-  }
+  public List<String> getMoveList(){return moveList;}
 
-  public void setColor(int color) {
-    this.color = color;
-  }
+  public void setMoveList(List<String> moveList){this.moveList = moveList;}
 
-  public String getName() { return name; }
+  public int getColor() {return color;}
+
+  public void setColor(int color) {this.color = color;}
+
+  public String getName() {return name;}
 
   public void setName(String name) {
     this.name = name;
   }
 
+  public String getMove(int index){ return moveList.get(index); }
+
+  //public int selectMove() {
+    //getting number that the move starts at so we can select the chip at this place
+    //char charChip = (moveList.get(moveChoice)).charAt(0);
+    //int chip = Character.getNumericValue(charChip);
+
+    //returns the index of the selected chips placement on the board
+    //return (board.length - chip);
+  //}
+
   //Finalizes move to be played and updates the board
-  public int[] playMove(int[] board, List<String> moveList, int moveChoice) {
-    //Splits String from moveChoice into an array of landing points
-    String move = moveList.get(moveChoice);
+  public int[] playMove(int[] board, int moveChoice) {
+
+    //gets the move (String) selected from getMove by the index
+    String move = this.getMove(moveChoice);
+
+    //Splits String from above selected move into an array of landing points
     String [] points = move.split("-");
 
     //Number that the chip moves from
