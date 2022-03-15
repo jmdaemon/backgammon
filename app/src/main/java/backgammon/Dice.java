@@ -36,9 +36,10 @@ public class Dice extends Die {
 }
 
 //Below is another way if we use ArrayList rather than array
-//private List<Integer> dice2 = new ArrayList<>();
 //
-//public int[] getRolls2() {
+//	private List<Integer> dice2 = new ArrayList<>();
+//
+//	public List<Integer> getRolls2() {
 //	Die local = new Die();
 //
 //	dice2.add(local.getRoll());
@@ -48,5 +49,5 @@ public class Dice extends Die {
 //	if (dice2.get(0).equals(dice2.get(1))) {
 //		dieDouble = true;
 //	}
-//	return dice;
+//	return dice2;
 //}
