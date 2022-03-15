@@ -60,26 +60,15 @@ public class Player {
    * @return the updated board array after the move is applied to it
    */
   public int[] playMove(int[] board) {
-
-    //gets the move (String) selected from getMove by the index
     String move = this.getMove(this.selectMove());
-
-    //Splits String from above selected move into an array of landing points
     String [] points = move.split("-");
 
-    //Number that the chip moves from
-    int startPoint = Integer.parseInt(points[0]);
+    int startPoint = Integer.parseInt(points[0]); // Current position of piece
+    int startIndex = board.length - startPoint;   // Position of piece as board index
+    int endPoint = Integer.parseInt(points[points.length - 1]); // Final destination of piece
+    int endIndex = board.length - endPoint; // Final destination of piece as board index
 
-    //Index of the first point that the chip is moving from
-    int startIndex = board.length - startPoint;
-
-    //Number that the chip moves to
-    int endPoint = Integer.parseInt(points[points.length - 1]);
-
-    //Index of the point the chip moves to
-    int endIndex = board.length - endPoint;
-
-    if(endPoint == 0)
+    if (endPoint == 0)
       board[startIndex] = (board[startIndex] - 1);
     else {
       board[startIndex] = (board[startIndex] - 1);
