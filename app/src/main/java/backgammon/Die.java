@@ -10,5 +10,6 @@ public class Die {
 		Random rand = new Random();
 		die = rand.nextInt(6) + 1;
 		return die;
+		
 	}
 }
