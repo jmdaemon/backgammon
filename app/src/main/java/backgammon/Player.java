@@ -37,20 +37,15 @@ public class Player {
 
   public String getMove(int index){ return moveList.get(index); }
 
-  //public int selectMove() {
-    //getting number that the move starts at so we can select the chip at this place
-    //char charChip = (moveList.get(moveChoice)).charAt(0);
-    //int chip = Character.getNumericValue(charChip);
+  public int selectMove() {
 
-    //returns the index of the selected chips placement on the board
-    //return (board.length - chip);
-  //}
+  }
 
   //Finalizes move to be played and updates the board
-  public int[] playMove(int[] board, int moveChoice) {
+  public int[] playMove(int[] board) {
 
     //gets the move (String) selected from getMove by the index
-    String move = this.getMove(moveChoice);
+    String move = this.getMove(this.selectMove());
 
     //Splits String from above selected move into an array of landing points
     String [] points = move.split("-");
