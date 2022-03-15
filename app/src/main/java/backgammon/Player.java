@@ -2,7 +2,6 @@ package backgammon;
 
 import java.awt.*;
 
-
 public class Player {
 
   private final String name;
