@@ -3,7 +3,6 @@ package backgammon;
 import java.util.List;
 
 public class Player {
-
   private int color;
   private String name;
   private List<String> moveList;
@@ -29,6 +28,7 @@ public class Player {
   public List<String> getMoveList(){return moveList;}
   public int getColor() {return color;}
   public String getName() {return name;}
+  public String getMove(int index){ return moveList.get(index); }
 
   // Setters
   public void setMoveList(List<String> moveList){this.moveList = moveList;}
@@ -36,22 +36,12 @@ public class Player {
   public void setName(String name) {this.name = name;}
 
   /**
-   * gets a move from the moveList at an entered index
-   *
-   * @param index index of move choice in moveList
-   * @return move as a string
-   */
-  public String getMove(int index){ return moveList.get(index); }
-
-  /**
    * Obtains the index of the selected move from the player
    * This will be a callback function that the GUI uses to
    * determine the current move selected in the movesList.
    * @return
    */
-  public int selectMove() {
-    return 0;
-  }
+  public int selectMove() { return 0; }
 
   /**
    *  Finalizes move to be played and updates the board
