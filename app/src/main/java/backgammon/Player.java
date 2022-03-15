@@ -4,8 +4,8 @@ import java.util.List;
 import java.awt.*;
 
 public class Player {
-  private int color;
   private String name;
+  private Color color;
   private List<String> moveList;
 
   /**
@@ -13,27 +13,27 @@ public class Player {
    * @param name Player's name
    * @param moveList The possible moves available for the player
    */
-  public Player(int color, String name, List<String> moveList) {
+  public Player(Color color, String name, List<String> moveList) {
     this.color = color;
     this.name = name;
     this.moveList = moveList;
   }
 
   public Player() {
-    color = 0;
+    color = null;
     name = null;
     moveList = null;
   }
 
   // Getters
   public List<String> getMoveList(){return moveList;}
-  public int getColor() {return color;}
   public String getName() {return name;}
+  public Color getColor() { return color; }
   public String getMove(int index){ return moveList.get(index); }
 
   // Setters
   public void setMoveList(List<String> moveList){this.moveList = moveList;}
-  public void setColor(int color) {this.color = color;}
+  public void setColor(Color color) {this.color = color;}
   public void setName(String name) {this.name = name;}
 
   /**
@@ -68,8 +68,6 @@ public class Player {
     return board;
   }
 
-  private final String name;
-  private final Color color;
   private final int direction;
   private final int outPoint;
   private final int barPoint;
@@ -89,17 +87,6 @@ public class Player {
   public void bearOff() {
     outCount++;
   }
-
-
-  public String getName() {
-    return name;
-  }
-
-
-  public Color getColor() {
-    return color;
-  }
-
 
   public int getDirection() {
     return direction;
