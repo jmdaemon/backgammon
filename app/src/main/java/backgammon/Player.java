@@ -26,22 +26,10 @@ public class Player {
     this.color = color;
   }
 
-  public String getName() {
-    return name;
-  }
+  public String getName() { return name; }
 
   public void setName(String name) {
     this.name = name;
-  }
-
-  //Selects chip from moveList given
-  public int selectChip(int[] board, List<String> moveList, int moveChoice) {
-    //getting number that the move starts at so we can select the chip at this place
-    char charChip = (moveList.get(moveChoice)).charAt(0);
-    int chip = Character.getNumericValue(charChip);
-
-    //returns the index of the selected chips placement on the board
-    return (board.length - chip);
   }
 
   //Finalizes move to be played and updates the board
