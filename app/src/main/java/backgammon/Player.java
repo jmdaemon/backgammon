@@ -86,7 +86,7 @@ public class Player {
    * @return
    */
   public int selectMove() {
-
+    return 0;
   }
 
 
