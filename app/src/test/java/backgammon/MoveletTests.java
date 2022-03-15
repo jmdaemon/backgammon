@@ -1,34 +1,54 @@
 package backgammon;
 
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
+//import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 class MoveletTests {
+  List<Integer> dice;
+  List<Movelet> result;
+  List<Movelet> expected;
+
+  @BeforeEach
+  public void setUp() {
+    //result = new ArrayList<>();
+    //expected = new ArrayList<>();
+    result = Arrays.asList();
+    expected = Arrays.asList();
+  }
 
   @Test
   public void canConstructMoveletsForMixed() {
-    List<Integer> dice = Arrays.asList(3, 5);
+    //List<Integer> dice = Arrays.asList(3, 5);
+    dice = Arrays.asList(3, 5);
     Move m = new Move(2, 10, 1, dice, false);
-    List<Movelet> result = m.getMovelets();
-    List<Movelet> expected = Arrays.asList(
+    //List<Movelet> result = m.getMovelets();
+    //List<Movelet> expected = Arrays.asList(
+    result = m.getMovelets();
+    expected = Arrays.asList(
         new Movelet(2, 5, 3),
         new Movelet(5, 10, 5));
     backgammon.Utility.checkResult(expected, result, "Should create movelets for mixed moves");
+    //utility.checkResult(expected, result, "Should create movelets for mixed moves");
   }
 
   @Test
   public void canConstructMoveletsForDoubles() {
-    List<Integer> dice = Arrays.asList(2, 2, 2, 2);
+    //List<Integer> dice = Arrays.asList(2, 2, 2, 2);
+    dice = Arrays.asList(2, 2, 2, 2);
     Move m = new Move(2, 10, 1, dice, true);
-    List<Movelet> result = m.getMovelets();
-    List<Movelet> expected = Arrays.asList(
+    //List<Movelet> result = m.getMovelets();
+    //List<Movelet> expected = Arrays.asList(
+    result = m.getMovelets();
+    expected = Arrays.asList(
         new Movelet(2, 4, 2),
         new Movelet(4, 6, 2),
         new Movelet(6, 8, 2),
         new Movelet(8, 10, 2));
     backgammon.Utility.checkResult(expected, result, "Should create movelets for doubles");
+    //utility.checkResult(expected, result, "Should create movelets for doubles");
   }
 }
