@@ -4,26 +4,14 @@ import java.util.List;
 
 public class Player {
 
-  // Black == 1; White == 2
   private int color;
   private String name;
   private List<String> moveList;
 
   /**
-   * Default no arg constructor for Player
-   */
-  public Player() {
-    color = 0;
-    name = null;
-    moveList = null;
-  }
-
-  /**
-   * Constructor for Player
-   *
-   * @param color color assigned to Player
-   * @param name name assigned to Player
-   * @param moveList list of possible moves for Player
+   * @param color Color of the player's pieces
+   * @param name Player's name
+   * @param moveList The possible moves available for the player
    */
   public Player(int color, String name, List<String> moveList) {
     this.color = color;
@@ -31,46 +19,20 @@ public class Player {
     this.moveList = moveList;
   }
 
-  /**
-   * gets List of all possible moves
-   *
-   * @return
-   */
+  public Player() {
+    color = 0;
+    name = null;
+    moveList = null;
+  }
+
+  // Getters
   public List<String> getMoveList(){return moveList;}
-
-  /**
-   * sets list of possible moves
-   *
-   * @param moveList
-   */
-  public void setMoveList(List<String> moveList){this.moveList = moveList;}
-
-  /**
-   * gets player color
-   *
-   * @return
-   */
   public int getColor() {return color;}
-
-  /**
-   *sets player color
-   *
-   * @param color
-   */
-  public void setColor(int color) {this.color = color;}
-
-  /**
-   * gets player name
-   *
-   * @return
-   */
   public String getName() {return name;}
 
-  /**
-   * sets player name
-   *
-   * @param name
-   */
+  // Setters
+  public void setMoveList(List<String> moveList){this.moveList = moveList;}
+  public void setColor(int color) {this.color = color;}
   public void setName(String name) {this.name = name;}
 
   /**
