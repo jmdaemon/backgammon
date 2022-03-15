@@ -1,7 +1,7 @@
 package backgammon;
 
 import java.util.List;
-import java.awt.*;
+import java.awt.Color;
 
 public class Player {
   private String name;
@@ -14,6 +14,7 @@ public class Player {
    * @param color Color of the player's pieces
    * @param name Player's name
    * @param moveList The possible moves available for the player
+   * @param direction The direction the player is going in around the board
    */
 
   public Player (String name, Color color, List<String> moveList, int direction) {
@@ -31,10 +32,11 @@ public class Player {
   }
 
   // Getters
-  public List<String> getMoveList(){return moveList;}
-  public String getName() {return name;}
-  public Color getColor() { return color; }
-  public String getMove(int index){ return moveList.get(index); }
+  public List<String> getMoveList() { return moveList; }
+  public String getName()           { return name; }
+  public Color getColor()           { return color; }
+  public int getDirection()         { return direction; }
+  public String getMove(int index)  { return moveList.get(index); }
 
   // Setters
   public void setMoveList(List<String> moveList){this.moveList = moveList;}
@@ -71,9 +73,5 @@ public class Player {
       board[endIndex] = (board[endIndex] + 1);
     }
     return board;
-  }
-
-  public int getDirection() {
-    return direction;
   }
 }
