@@ -35,11 +35,12 @@ public class Move {
     }
   }
 
-  //Will need this to remove the dice from the list of dice in the game loop
-  public List<Integer> getDice(List<Integer> dice) {
+  // Will need this to remove the dice from the list of dice in the game loop
+  public List<Integer> getDice() {
+    List<Integer> diceList = new ArrayList<>();
     for (Movelet movelet : movelets)
-      dice.add(movelet.getDie());
-    return dice;
+      diceList.add(movelet.getDie());
+    return diceList;
   }
 
   public List<Movelet> getMovelets() {

@@ -18,6 +18,4 @@ public record Movelet(int from, int to, int die) {
   public String toString() {
     return "-" + to;
   }
-
 }
-
