@@ -32,12 +32,12 @@ public class Move {
 
     // Enumerate all the possible move combinations for mixed
     if (!isDoubles) {
-      int dest = from + dir * die;
+      int dest = src + dir * die;
       movelets.add(new Movelet(src, dest, die));
       if (dice.size() == 2) {
         int nextDie = dice.get(1);
-        src = from + dir * die;
-        dest = from + dir * (die + nextDie);
+        src = dest;
+        dest = src + dir * nextDie;
         movelets.add(new Movelet(src, dest, nextDie));
       }
     }
