@@ -9,7 +9,6 @@ public class Player {
   private List<String> moveList;
 
   private int direction;
-  private int outCount;
 
   /**
    * @param color Color of the player's pieces
@@ -21,7 +20,6 @@ public class Player {
     this.name = name;
     this.color = color;
     this.direction = direction;
-    this.outCount = 0;
   }
 
   public Player() {
@@ -30,7 +28,6 @@ public class Player {
     moveList = null;
 
     direction = 0;
-    outCount = 0;
   }
 
   // Getters
@@ -76,15 +73,7 @@ public class Player {
     return board;
   }
 
-  public void bearOff() {
-    outCount++;
-  }
-
   public int getDirection() {
     return direction;
-  }
-
-  public int getOutCount() {
-    return outCount;
   }
 }
