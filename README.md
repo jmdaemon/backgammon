@@ -7,10 +7,11 @@ There are twenty four narrow triangles called points on a board.
 The board is separated into two quadrants called the Outer and Home boards.
 
 Each player has 15 checkers.
-    - 2 on the outermost or 24th point
-    - 5 on the 13th point
-    - 3 on on the 8th point
-    - 5 on the 6th point
+
+- 2 on the outermost or 24th point
+- 5 on the 13th point
+- 3 on on the 8th point
+- 5 on the 6th point
 
 Players move in one direction, either clockwise or counter clockwise for the opponent around the board.
 Both players roll dice to determine who plays first.
