@@ -1,36 +1,31 @@
 package backgammon;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Dice extends Die {
+public class Dice {
 
 	private int[] dice;
-	private boolean dieDouble;
 
-	public int[] getRolls() {
-		Die local = new Die();
-		// had to initialize the array or else it spits out a nullPointerException
+	Dice() {
 		dice = new int[2];
-		dice[0] = local.getRoll();
-		dice[1] = local.getRoll();
-		dieDouble = false;
-		if (dice[0] == dice[1]) {
-			dieDouble = true;
-		}
-		return dice;
 	}
 
-	public int getFirstRoll() {
-		return dice[0];
-	}
+	//public int[] getRolls() {
+		//Die local = new Die();
+		//dice[0] = local.getRoll();
+		//dice[1] = local.getRoll();
+		//dieDouble = false;
+		//if (dice[0] == dice[1]) {
+			//dieDouble = true;
+		//}
+		//return dice;
+	//}
 
-	public int getSecondRoll() {
-		return dice[1];
-	}
+	// Getters
+	public int getFirst() { return dice[0]; }
+	public int getSecond() { return dice[1]; }
+	public int[] getDice() { return dice; }
 
 	public boolean isDoubles() {
-		return dieDouble;
+		return (dice[0] == dice[1]) ? true : false;
 	}
 
 }
