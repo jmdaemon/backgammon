@@ -1,14 +1,11 @@
 package backgammon;
 
-import java.util.List;
 import java.util.Random;
 
-public class Computer extends Player{
+public class Computer extends Player {
 
   /**
-   * randomly selects an int as the index of a move in moveList
-   *
-   * @return random int to be the index for selected move in moveList
+   * Randomly selects a move in the moveList
    */
   @Override
   public int selectMove() {
@@ -16,4 +13,3 @@ public class Computer extends Player{
     return rnd.nextInt(getMoveList().size());
   }
 }
-
