@@ -41,7 +41,8 @@ public class BoardBW {
     }
 
     dice.remove(move.getDice());
-    //Repaint
+    //Repaint - will need to send a copy of Board to be repainted, or
+    //have the request grab the copy itself
 
   }
 
@@ -153,13 +154,6 @@ public class BoardBW {
   }
 
 
-//  private boolean isMaximumDie(Player p, int from, int die) {
-//    if (dice.size() < 2) return true;
-//    int max = Integer.max(dice.get(0), dice.get(1));
-//    return die >= max || !board[from + (p.getDirection() * max)].isOpen(p);
-//  }
-
-
   public boolean areAllOnHome(Player p) {
     if (p.getOutPoint() == 25) //Player 1
       for (int i = 1; i < 19; i++)
@@ -190,8 +184,7 @@ public class BoardBW {
   }
 
 
-  //Would construct the version of rhe board
-  //that would match Pridi's board in GUI
+  //Would give Pridi the version of the board he can use
   public int[] getBoard() {
     int[] board = new int[26];
     for (int i = 0; i < board.length; i++) {
@@ -201,5 +194,35 @@ public class BoardBW {
     }
     return board;
   }
+
+
+  public int getWinModifier(Player winner, Player loser) {
+    if (isBackgammon(winner, loser)) return 3;
+    return (isGammon(loser)) ? 2 : 1;
+  }
+
+
+  private boolean isBackgammon(Player winner, Player loser) {
+    if (board[loser.getBarPoint()].getChips() > 0) return true;
+
+    if (winner.getOutPoint() == 25)
+      for (int i = 19; i <= 24; i++)
+        if (board[i].getChips() > 0)
+          return true;
+
+    if (winner.getOutPoint() == 0)
+      for (int i = 6; i >= 1; i--)
+        if (board[i].getChips() > 0)
+          return true;
+
+    return false;
+  }
+
+
+  private boolean isGammon(Player loser) {
+    return loser.getOutCount() == 0;
+  }
+
+
 
 }

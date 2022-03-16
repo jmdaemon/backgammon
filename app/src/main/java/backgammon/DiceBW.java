@@ -15,6 +15,14 @@ public class DiceBW {
   }
 
 
+  public int firstToMove() {
+    while (isDoubles)
+      roll();
+
+    return (dice.get(0) > dice.get(1)) ? 0 : 1;
+  }
+
+
   public void roll() {
     dice.clear();
 

@@ -2,6 +2,7 @@ package backgammon;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Random;
 
 public class PlayerBW {
 
@@ -11,6 +12,7 @@ public class PlayerBW {
   private final int outPoint;
   private final int barPoint;
   private int outCount;
+  private int score;
   private boolean hasCube;
 
 
@@ -21,9 +23,14 @@ public class PlayerBW {
     this.outPoint = outPoint;
     this.barPoint = bar;
     outCount = 0;
+    score = 0;
     hasCube = true;
   }
 
+
+  public int addToScore(int roundScore) {
+    return score += roundScore;
+  }
 
   public void setCube(boolean cube) {
     hasCube = cube;
@@ -37,6 +44,11 @@ public class PlayerBW {
 
   public void bearOff() {
     outCount++;
+  }
+
+
+  public void resetOutCount() {
+    outCount = 0;
   }
 
 
@@ -71,7 +83,8 @@ public class PlayerBW {
 
 
   public Move selectMove(List<Move> moveList) {
-    return moveList.get(0);
+    Random rnd = new Random();
+    return moveList.get(rnd.nextInt(moveList.size()));
   }
 
 
